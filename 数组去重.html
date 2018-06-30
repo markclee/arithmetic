@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript">
+        // function getQc(){
+
+        // }
+        var getQc = function(arr){
+            var newArr = [arr[0]];
+            for(var i = 1; i < arr.length; i++){
+                for(var j = 0; j < newArr.length; j++){
+                    var flag = true;
+                    if(arr[i] === newArr[j]){
+                        flag = false;
+                        break;
+                    }
+                }
+                if(flag){
+                    newArr[newArr.length] = arr[i];
+                }
+            }
+            return newArr;
+        }
+        // var repeat = [1,2,2,0,6,8,8,0];
+        var repeat = new Array(1,2,2,0,6,8,8,0);
+       console.log(getQc(repeat));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
