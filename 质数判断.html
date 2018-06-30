@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script>
+    // 用户输入一个数，判断是否为质数  
+    // function isPrime(num){
+    //     for(var i = 2; i < num; i++){
+    //         if(num % i === 0){
+    //             return false;
+    //         } //end if
+            
+    //     } //end for
+    //     return true;
+    // }
+    // if(isPrime(7)){
+    //     console.log('是质数');
+    // }else{
+    //     console.log('不是质数');
+    // }
+
+    // //除以数字的一半，即可判断是否为质数
+    // function isPrime(num){
+    //     for(var i = 2; i <= num/2; i++){   //此处是小于等于
+    //         if(num % i === 0){
+    //             return false;
+    //         } //end if
+            
+    //     } //end for
+    //     return true;
+    // }
+
+    //小于平方根+1
+    // function isPrime(num){
+    //     for(var i = 2; i <= Math.sqrt(num)+1; i++){   //此处是小于等于 貌似不能判断2????????????
+    //         if(num % i === 0){
+    //             return false;
+    //         } //end if
+            
+    //     } //end for
+    //     return true;
+    // }
+    // console.log(isPrime(11));
+
+    //输入一个数，判断这个数是否为质数
+    // function isPrime(num) {
+    //     var index = 0;
+    //     for(var i = 1; i <= num; i++) {
+    //         if(num % i === 0){
+    //             index++;
+    //         }
+    //     }
+    //     if(index == 2){
+    //         return true;
+    //     }else{
+    //         return false;
+    //     }
+    // }
+    // console.log(isPrime(7));
+
+
+     /*写一个函数，用户输入一个数字，输出1-这个数之间所有的质数*/
+    function isPrime(num) {
+        var arr = [];
+        for (var i = 2; i <= num; i++) {  //拿到范围内的一个数，判断是否为质数，1不用判断，num本身得判断是否为质数
+            for (var j = 2; j < i; j++ ) { //用户输入7， 外层开始判断5， 当i与j相等时候，说明2到i-1之间，不存在除尽的数
+                if(i % j === 0){  //取余为0 可以被整除 说明不是质数
+                    break;
+                } //end if
+            } //end for
+            if(j === i){
+            //arr[arr.length] = i;
+          
+            //arr.push(arr[i]);
+        //    console.log(i); //判断的是i是否为质数
+        //    console.log(arr[arr.length] = 'zhangsan');
+        //    console.log(arr[arr.length] = 'lisi');
+        //    console.log(arr[arr.length] = 'wangwu');
+
+            } //end if
+        } //end for
+        return arr;
+        
+    }
+    console.log(isPrime(20));    //console.log(isPrime(20));//最后有个undefined，因为函数没有返回值，所以是undefined
+    // 函数必须通过return返回值吗？
+</script>
+
+<body>
+    
+</body>
+</html>
