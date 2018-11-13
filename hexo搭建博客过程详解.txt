@@ -1,0 +1,85 @@
+<1-1>安装hexo
+ npm install hexo -g
+ 开始安装hexo,输入hexo -v 检测是否安装成功
+
+<1>cd到当前盘符根目录下
+
+<2>hexo init -->>初始化
+
+
+<3>在_Config.yml中设置
+
+ deploy:
+	type: git
+	repository: 仓库生成的地址
+	branch: master
+<4>ssh-keygen rsa -C "****@qq.com"-->>生成新的ssh文件,绑定到github上
+
+<5>npm install hexo-deployer-git 部署之前需要安装这个扩展!
+
+<6>Hexo发布到github的时候,会丢失reanme和CNAME;
+	$ npm install hexo-generator-cname  -->>安装此插件
+
+
+<7>hexo clean-->>清除缓存!
+
+<8>hexo new test -->>创建文档
+
+<9>最后 hexo g     hexo d提交一次
+
+<10>提交成功后,会在终端显示,Deploy done:git
+
+<11>创建一个新的MD格式的文档,hexo g hexo d进行提交上传更新
+
+
+	
+
+
+
+
+
+
+注意事项:创建仓库地址的时候,名字名称和仓库地址一定要一样!
+从新生成.ssh文件,配置到github上!
+
+
+<1>配置博客主题
+cd到blog根目录下方,
+
+ git clone https://github.com/MOxFIVE/hexo-theme-yelee.git themes/yelee
+
+
+在blog/themes/yelee这个就是主题的文件
+
+<2>使用主题
+在blog根目录下,找到_confg.yml文件,找打theme:修改成theme: yelee
+
+替换完毕后,hexo g   hexo d在次进行提交操作!网速慢可能会造成,显示延迟!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<1>卸载hexo: npm uninstall hexo
