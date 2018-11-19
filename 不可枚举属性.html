@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript">
+       var obj = {
+       	name : 'Jack'
+       }
+       obj.name = 'Tom';
+       // 向对象内添加成员的方法Object.definedProperty
+       // 第一个参数 => 向哪个对象内定义属性
+       // 第二个参数 => 定义属性的key
+       // 第三个参数 => 对当前这个key的定义 接受一个对象
+       // 默认不可枚举false  不可修改false
+       Object.defineProperty(obj, 'age', {
+       	value : 18
+       	// writable : false,
+       	// enumerable : false
+       });
+       obj.age = 20;
+       for(var key in obj){
+       		console.log(key);
+       }
+       console.log(obj);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
