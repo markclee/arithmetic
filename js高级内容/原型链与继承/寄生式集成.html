@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="01.js"></script>
+    <script>
+        /*
+            -寄生式继承,没有自己的东西,所有东西都从父类里边来
+            -自己也没有自己的特色(自己的私有属性,自己的原型)
+        -构造函数里边的return
+            - return
+                + 基本数据类型
+                    =没有任何意义,写了也不会return出来,白写
+                + 复杂数据类型(引用/对象)
+                    =那么构造函数本身 return出来的东西就没有了,你return的是什么,得到的就是什么
+                    =new Student 和 student()是一样的
+            就是在自己的身体内new父类
+            ---操作实例
+            把父类的实例return出来
+        
+            -当我new Student的时候,得到的其实是一个 Person的实例
+            -我们看起来得到的是一个Sudent的实例,但本质得到的是Person的实例 
+            -本来应该属于Student的实例
+            -其实这个实例就是Person的实例
+        缺陷
+            没有自己的东西,其实就是父类的实例
+        */          
+       function Student(name){
+           this.name = 'Tom';
+           var p = new Person;
+        //    return [1,2,3];
+            return p;
+       }
+       Student.prototype.fn = function(){}
+       var s = new Student;
+       console.log(s)
+
+
+    </script>
+</body>
+</html>

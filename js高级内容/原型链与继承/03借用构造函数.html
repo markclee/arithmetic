@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="./01.js"></script>
+	<script>
+		/*
+			二、借用构造函数继承-构造继承，call继承
+
+			--借用call方法来改变 父类 函数(此处区别于构造函数)执行时候的 this指向
+			--构造函数与普通函数有什么区别？
+				+首字母，没有任何区别
+			--就是看看有没有和new连用
+				+没有连用，那么函数里边的this该指向谁就是谁
+				+连用的时候，那么函数里边的this才指向实例
+
+
+				-改造代码
+				Person函数，是window调用的，所以里边的this指向window
+				function Student(name) {
+					s.name = name || 'person'
+					s.eat = function(){
+						console.log('eatting')
+					}
+				}
+				当我new Student的时候
+				{
+					name : 'person',
+					eat : function(){},
+					__proto__ : {
+						constructor : Student,
+						__proto__ : Object
+					}
+				}
+				把 父类 的函数体拿到我自己的身体里边执行了一下
+				缺点：不能继承父类原型上的内容
+		*/
+		function Student(name) {
+			Person.call(this);
+		}
+		var s = new Student;
+
+
+	</script>
+</body>
+</html>

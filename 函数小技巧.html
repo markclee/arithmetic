@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		// var name = 'jack';
+		// function fn() {
+		// 	console.log(name);
+		// }
+		// fn();  //jack
+		// window.fn(); //jack
+		// var obj = {
+		// 	name:'obj里面',
+		// 	fun: fn
+		// }
+		// obj.fun(); //jack
+
+		// 打印变量，不看函数是怎么调用的，看变量的定义阶段
+		// 调用函数，看函数的定义阶段在哪，定义在全局，遵循作用域查找机制就好 
+
+		// var name = 'window';
+		// var obj = {
+		// 	name : 'obj里边',
+		// 	fn: function () {
+		// 		console.log(this.name); 
+		// 	}
+		// }
+		// // fun() this指向是window
+		// var fun = obj.fn;
+		// obj.fn(); //obj里边
+		// fun();  //window 为什么不是obj里边 	
+		// window.fun();  //window
+		// // 箭头函数除外，根本不需要考虑函数定义在哪里，只需要关注函数怎么调用的
+
+
+		// var name = 'window';
+		// var obj = {
+		// 	name : 'obj里边',
+		// 	fn: function () {
+		// 		console.log(name); 
+		// 	}
+		// }
+		// var fun = obj.fn;
+		// obj.fn();  //window
+		// fun();  //window
+		// window.fun();    //window
+		// 对象不限制作用域，只有函数限定私有作用域,function是私有作用域，为什么不是obj里边？？？？？？？？
+
+/*
+this指向问题
+	--谁调用指向谁
+	--自执行函数，一般指向window
+	--事件源.事件   this指向事件源，事件委托的this，指向设置了事件的标签，非触发的事件标签
+	构造函数指向当前实例(和new使用)
+ 	call apply bind 指向第一个参数
+	箭头函数在定义阶段就决定了this的指向，且不能被call apply bind改变
+		+定义函数的上一行，this指向谁，箭头函数中this就指向谁
+		+箭头函数定义的时候由上下文决定
+*/
+var name = 'rose';
+var obj = {
+	name : 'jack',
+	age : 18,
+	getName : function() {
+		return this.name;
+	},
+	setName : function(value) {
+		this.name = value;
+		return this;
+	},
+	setAge : function (value) {
+		this.age = value;
+		return this;
+	}
+}
+
+console.log(obj.getName());
+// 当我们在一个设置型操作使用完毕后，调用一个获取型操作，链式编程结束
+obj.setName('rose').setAge('18').getName();
+obj.getName();
+obj();
+
+	</script>
+</body>
+</html>

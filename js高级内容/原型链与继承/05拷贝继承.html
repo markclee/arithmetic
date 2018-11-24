@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src='./01.js'></script>
+	<script>
+		/*拷贝继承 （forin继承）
+			-拷贝继承，就是利用了forin循环，拷贝了一份父类的实例
+
+			-见forin循环.html
+			
+			Student.prototype = {
+				constructor : Student,
+				name : 'person',
+				eat : function(){},
+				sayHi :function(){},
+				__proto__ : Object
+			}
+			当我new Student的时候
+			{
+				__proto__ : {
+					constructor : Student,
+					name : 'person',
+					eat : function(){},
+					sayHi :function(){},
+					__proto__ : Object
+				}
+			}
+
+		*/
+		function Student(name){
+			var p = new Person; //p是实例
+			for  (var key in p){
+				//one => name
+				//two => eat
+				//thr => sayHi
+				Student.prototype[key] = p[key]; //把对象中的每个值，赋值给Student.prototype,student中的prototype中拿到了Person中的属性
+			}
+		}
+
+		var s = new Student;
+	</script>
+</body>
+</html>

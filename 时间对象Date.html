@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+            var date = new Date();
+            console.log(date); //  Mon Jul 02 2018 13:57:12 GMT+0800 (中国标准时间)
+            var date = new Date(9999999);  //创建1970年开始的时间  毫秒
+            console.log(date);
+            var date = new Date(2018,7,2,12,12,12,12);  //不需要引号
+            console.log(date);
+
+            var date = new Date();
+            console.log(date.getFullYear());
+            console.log(date.getMonth());
+            console.log(date.getDate());
+            console.log(date.getHours());
+            console.log(date.getMinutes());
+            console.log(date.getSeconds());
+            console.log(date.getMilliseconds());
+            console.log(date.getDay());
+            console.log(date.getTime());
+
+            //封装一个函数，实现格式化日期， 如2018年10月10号， 23点12分12秒
+            //获取年月日时间 拼接字符串
+            //参数 获取时间
+            //  //返回值 拼接好字符串时间
+            var date = new Date('2018-07-03 12:12:12:12');  //时间需要引号
+            function linkTime(fullDate){
+                var year = fullDate.getFullYear();
+                var month = fullDate.getMonth();
+                var day = fullDate.getDay();
+                var hours = fullDate.getHours();
+                var min = fullDate.getMinutes();
+                var sec = fullDate.getSeconds();
+                
+                return  year + '年' + month + '月' + day + '日' + hours + '时' + min + '分' + sec + '秒';
+
+            }
+            console.log(linkTime(date));
+            
+
+            //用户输入一个时间戳，输出日期
+            // 用函数封装一个函数，实现两个日期的时间差，两个时间差相差多少小时，零多少分钟，零多少秒
+            //形参，两个时间
+            //返回值，拼好的字符串
+            function getDiff(begin, end){
+                var benginMills = begin.getTime();
+                var endMills = end.getTime();
+                var diff = endMills - benginMills;
+
+                var days = parseInt(diff / 1000 / 60 / 60 / 24);
+                var hours = Math.floor(diff / 1000 / 60 / 60);
+                var mins = Math.floor(diff / 1000 / 60 % 60);
+                var secs = Math.floor(diff / 1000 % 60); //秒与60取余
+
+                return days + '天' + hours + '时' + mins + '分' + secs + '秒';
+            }
+            var b = new Date();
+            var e = new Date('2018-7-3 2:12:12:12');
+            console.log(getDiff(b, e));
+
+            // 封装成对象  字面量方式
+            var Tool = {
+                name: '输入两个时间，输出这两个时间的差',
+                getDiff:function(begin, end){
+                    var benginMills = begin.getTime();
+                    var endMills = end.getTime();
+                    var diff = endMills - benginMills;
+
+                    var days = parseInt(diff / 1000 / 60 / 60 / 24);
+                    var hours = Math.floor(diff / 1000 / 60 / 60);
+                    var mins = Math.floor(diff / 1000 / 60 % 60);
+                    var secs = Math.floor(diff / 1000 % 60); //秒与60取余
+
+                    return days + '天' + hours + '时' + mins + '分' + secs + '秒';
+                }
+            };
+
+            // var diff = new Tool(); //使用自定义函数 创建的对象，需要用new调用对象
+            var btime = new Date();
+            var etime = new Date('2018-07-03 12:12:12:12');
+            console.log(Tool.getDiff(btime, etime));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

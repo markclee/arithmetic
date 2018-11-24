@@ -9,7 +9,8 @@
         // function getQc(){
 
         // }
-        var getQc = function(arr){
+    window.onload = function () {
+            var getQc = function(arr){
             var newArr = [arr[0]];
             for(var i = 1; i < arr.length; i++){
                 for(var j = 0; j < newArr.length; j++){
@@ -27,7 +28,26 @@
         }
         // var repeat = [1,2,2,0,6,8,8,0];
         var repeat = new Array(1,2,2,0,6,8,8,0);
-       console.log(getQc(repeat));
+        console.log(getQc(repeat));
+
+
+        // 统计数组元素出现的次数
+        var arr = [1,1,2,3,4,2,1];
+        var obj = {};
+        for (var i = 0; i < arr.length; i++) {
+            if(obj[arr[i]]) {
+                // 属性        值
+                // 设置属性 = 给属性赋值
+                // obj[arr[i]]++;
+                obj[arr[i]] = obj[arr[i]] + 1;
+            } else {
+                // 没有这个属性，设置属性 = 给属性赋值
+                obj[arr[i]] = 1;
+            }
+        }
+        console.log(obj);
+    } //end window
+
     </script>
 </head>
 <body>

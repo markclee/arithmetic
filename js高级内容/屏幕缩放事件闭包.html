@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<p id="demo"></p>
+<body>
+	<script>
+		var num = 0;
+		var count = 0;
+		var demo = document.getElementById('demo');
+		window.onresize = throttle(function(){
+			console.log(count++);
+			demo.innerHTML = window.innerWidth || document.documentElement.clientWidth;
+		}, 300)
+
+		//闭包，节流
+		function throttle(fn, delay){
+			var timer = null;
+			return function() {
+				clearTimeout(timer);
+				timer = setTimeout(fn, delay)
+			}
+		}
+	</script>
+</body>
+</html>

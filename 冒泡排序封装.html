@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var CArray = function() {
+			// this指向当前实例对象
+			this.dataStore = [9,5,6,8,2,6,7,3,4,1];
+			this.swap = swap;  //数值交换位置
+			this.bubbleSort = bubbleSort;  //冒泡排序
+		}
+		function swap(arr, index1, index2) {
+			var temp = arr[index1];
+			arr[index1] = arr[index2];
+			arr[index2] = temp;
+		}
+		function bubbleSort(){
+			var data = this.dataStore;
+			var numLength = data.length;
+			// for(var outer = 0; outer < numLength - 1; outer++) {
+			// 	for (var inner = 0; inner < numLength - 1 - outer; inner++){
+			// 		if(data[inner] > data[inner + 1]){
+			// 			this.swap(this.dataStore, inner, inner + 1);
+			// 		}
+			// 	}
+			// }
+			for (var outer = numLength; outer>=2; outer--) {
+				for(var inner = 0; inner <= outer - 1; inner++){
+					if(data[inner] > data[inner + 1]){
+						this.swap(this.dataStore, inner, inner+1)
+					}
+				}
+			}	
+		}
+		var aa = new CArray();
+		aa.bubbleSort();
+		console.log(aa.dataStore);
+	</script>
+</body>
+</html>

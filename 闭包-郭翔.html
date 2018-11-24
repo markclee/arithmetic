@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		/*--当函数体内有一些数据或内容被函数外部占用的时候，这个空间不会被销毁，这个不被销毁的空间叫做闭包
+			
+			--这个空间不被销毁
+			--因为函数的作用域关系，函数内部的变量不能被外界访问
+		*/
+
+
+		/**************************利用闭包在函数外部获取函数内的值****************************/ 
+		// function fn(){
+		// 	var num = 10;
+		// 	// 为了es6的代码糖考虑
+		// 	return function() {
+		// 		return num;
+		// 	}
+		// }
+		// var a = fn();
+		// var b = a();
+		// console.log(b);
+
+		/****************利用闭包在函数外部设置函数内的值****************/
+		// function fn(){
+		// 	var num = 10;
+		// // 这个值会被改变吗？
+
+		// 	// 为了es6的代码糖考虑
+		// 	return function(n) {
+		// 		num += n;
+		// 		return num;
+		// 	}
+		// }
+		// var a = fn();
+		// var b = a(10);
+		// console.log(b);
+
+
+/******************************************/
+		// function fn(){
+		// 	var num = 10;
+
+
+		// 	// 为了es6的代码糖考虑
+		// 	return {
+		// 		getNum : function() {
+		// 			return num;
+		// 		},
+		// 		setNum : function(n) {
+		// 			num += n;
+		// 			// return num;
+		// 		}
+		// 	}
+		// }
+		// var a = fn();
+		// var b = a.getNum()
+		// console.log(b);
+		// a.setNum(10);
+		// var c = a.getNum()
+		// console.log(c);
+
+
+		/**************代码糖写法***************/
+		function fn(){
+			var num = 10;
+			var num2 = 100;
+			return {
+				get getNum(){
+					return num;
+				},
+				set setNum(n){
+					num += n;
+				},
+				get getNum2(){
+					return num2;
+				}
+			}
+		}
+
+		// get set是关键字
+		var a = fn();
+		console.log(a.getNum)
+		a.setNum = 10;
+		console.log(a.getNum)
+		console.log(a.getNum2)
+
+		 // 闭包作用：
+		 // 1：保护私有变量，防止全局变量污染
+		 // 2：让函数外部可以操作函数内部的属性或者数据
+		 // 3：操作性能很好的封装底层代码
+
+		 // 沙箱模式：代码糖的的闭包写法就是沙箱模式
+		 // 科利华函数 callback回调函数
+	</script>
+</body>
+</html>

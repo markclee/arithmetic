@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script type="text/javascript">
+             // 内置构造函数创建对象
+             var person = new Object();
+            person.name = '小芳'; //属性
+            person.age = 18; 
+            person['sex'] = 'nv'
+            person.work = function(){ //方法
+                console.log('我喜欢敲代码');
+            };
+            // return person;
+            console.log(person.name);
+            console.log(person.name);
+            console.log(person.sex);
+            person.work();
+          
+          
+            //如何一次性创建多个对象，把对象封装在一个函数里边，创建对象时，调用函数
+            //工厂模式创建对象
+            //方法缺陷：
+            function creatObject (name, age) {
+                var obj = new Object(); //创建对象
+                // 添加属性
+                obj.name = name;
+                obj.age = age;
+                obj.sayHi = function(){
+                    console.log('大叫好，我叫:'+ this.name + '我几年' + this.age + '岁了');
+                };
+                return obj;
+            }
+            var per1 = creatObject('小芳', 20);
+
+
+            //自定义构造函数创建对象
+            //自己定义一个构造函数，创建一个对象
+            //函数与构造函数的区别，构造函数首字母大写
+            //构造函数可以当普通函数使用 ,但是两者作用不一样
+            //系统的构造函数 Object()   Array()
+            //怎么判断一个对象的数据类型， 
+            function Person(age, name){
+                this.name = age;
+                this.age = name;
+                this.sayHi = function(){
+                    console.log('大叫好，我叫:'+ this.name + '我几年' + this.age + '岁了');
+                }
+            }
+            var xm = new Person('小明', 10); //自定义构造函数穿件对象
+            console.log(xm.name);
+            console.log(xm.age);
+            // 只有自定义构造函数才能通过instanceof判断类型
+            console.log(xm instanceof Person);   //判断数据类型，左侧Person没有小括号
+            console.log(xm instanceof Object);
+
+
+            /*自定义构造函数做了什么
+            new这行代码做了四件事
+            1：在内存中(申请一块空闲的)空间，存储创建新的对象
+            2：把this设置为当天对象
+            3：设置属性和方法值
+            4：通过new关键字调用构造函数时，把值(对象)返回给调用者
+            */
+            // var xm = new Person('小明', 10);
+
+
+            /*字面量方式创建对象
+                var num = 5；
+                var num1 = [];
+                var num = {};
+                一次性的对象，值是固定的    
+            */
+           var obj = {};//空对象
+           obj.name = '小白';
+           obj.age = 10;
+           obj.sayHi = function(){
+               console.log('大家好, 我是:'+ this.name);
+           }
+           obj.sayHi()
+
+           //推荐使用方法
+           var obj = {
+               name:'小明',
+               age: 18,
+               sayHi:function(){
+                   console.log('我是:' + this.name);
+               },
+               eat:function(){
+                   console.log('吃了');
+               }
+           };
+           obj.eat();
+           obj.sayHi();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

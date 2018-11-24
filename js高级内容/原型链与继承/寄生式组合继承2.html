@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src='01.js'></script>
+    <script>
+        // 在寄生式组合继承1的基础上,添加一个中转站, 新的构造函数
+        function Student(name){
+           
+        }
+        function Abc(){
+            Abc.prototype = Person.prototype;
+            // 把Person的prototype给Abc的prototype
+            // 把Abc的实例,给student的原型,
+            // Student
+            /*new Abc {
+                __proto__:{
+                    Person.prototype
+                
+                }
+            
+            }
+            */ 
+            Student.prototype = new Abc;
+        }
+        var s = new Student;
+        console.log(s);
+    </script>
+</body>
+</html>

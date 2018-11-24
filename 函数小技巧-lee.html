@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+/*	--打印变量：fn name age arr obj
+		+不需要考虑函数是怎么调用的，只要看函数定义阶段就ok了，就在作用域中查找，遵循作用域查找机制
+		+变量不用看调用，只看定义
+	--打印 this.name this.age
+		+根本不需要考虑函数定义在哪，只需要关注函数怎么调用
+		+this只看调用，不看定义
+
+	--作用域：只有函数限定私有作用域，对象不限定私有作用域
+	window 中有个name属性
+*/
+		var name = 'jack';
+		function fn() {
+			console.log(name);
+		}
+		fn();  //jack
+		window.fn(); //jack
+		var obj = {
+			name:'obj里面',
+			fun: fn
+		}
+		obj.fun(); //jack
+
+		// 打印变量，不看函数是怎么调用的，看变量的定义阶段
+		// 调用函数，看函数的定义阶段在哪，定义在全局，遵循作用域查找机制就好 
+
+		var name = 'window';
+		var obj = {
+			name : 'obj里边',
+			fn: function () {
+				console.log(this.name); 
+			}
+		}
+		// fun() this指向是window
+		var fun = obj.fn;
+		obj.fn(); //obj里边
+		fun();  //window 为什么不是obj里边 	
+		window.fun();  //window
+		// // 箭头函数除外，根本不需要考虑函数定义在哪里，只需要关注函数怎么调用的
+
+
+		var name = 'window';
+		var obj = {
+			name : 'obj里边',
+			fn: function () {
+				console.log(name); 
+			}
+		}
+		var fun = obj.fn;
+		obj.fn();  //window
+		fun();  //window
+		window.fun();    //window
+		// 对象不限制作用域，只有函数限定私有作用域,function是私有作用域，为什么不是obj里边？？？？？？？？
+
+
+		function setN(obj){
+		    obj.name='屌丝';
+		    obj = new Object(); 
+		    obj.name = '腐女';
+		    return obj;
+			};
+			var per = new Object();
+			setN(per); //返回对象
+			// console.log(setN(per));
+			alert(per.name);  //屌丝 内部
+/*js执行机制
+作用域提升
+	--全局作用域提升
+		--函数提升
+		--变量提升
+		--同名的变量，函数，函数优先级高
+	--局部作用域提升
+		--局部作用域内的函数提升
+		--形参提升
+		--局部变量提升
+执行
+	--先预解析全局作用域，然后执行全局作用域中的代码
+	--在执行全局代码过程中，遇到函数调用就会先进行函数预解析，然后在执行函数内部代码
+
+函数
+	--定义阶段
+		++开辟一个空间
+		++把函数体内的代码当做字符串，一模一样的存储在空间内
+		++把空间地址赋值给函数名
+	--调用阶段
+		++按照函数名存储的地址，找到对应的空间
+		++形参赋值
+		++作用域空间内的预解析
+		++把空间内的字符串当做js代码来解析
+	--当函数体内的代码执行完毕以后，就会把这个空间销毁
+	--当函数体内有一些数据或内容被函数外部占用的时候，这个空间不会被销毁，这个不被销毁的空间叫做闭包
+*/
+	</script>
+</body>
+</html>

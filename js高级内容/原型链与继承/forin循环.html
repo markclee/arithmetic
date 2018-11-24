@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var obj = {
+			name : 'jack',
+			age : 18,
+			gender : '男'
+		}
+
+		Object.prototype.fn = function(){
+
+		}
+		/*forin循环，循环的是对象，{}内的代码执行了多少次，取决于对象中有多少个属性(可枚举属性--__proto__不可枚举属性)
+			-遍历的时候能够遍历出什么
+				+对象中的可枚举属性
+				+还能遍历出原型上的可枚举属性(__proto__里面的)
+
+			-语法
+				+点语法
+					obj.name
+					obj.name = 123
+				+数组关联语法
+					obj[str]
+						=字符串
+							-和点语法一样
+							-obj['name'] ==> obj.name
+						=变量
+							-是用[]内的变量的值，把变量替换掉
+							-例如 var str = 'name';
+								  obj['name']==>obj[str]==>obj.name
+		*/
+		var obj2 = {};
+		for (var k in obj){
+			console.log(k);
+			//one. key => 'name'
+			//two. key => 'age'
+			//thr. key => 'gender'
+
+			//obj2.name = obj.name;
+			//赋值的操作
+			obj2[k] = obj[k];
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  // // 介绍一下arguments  模拟 Math.max()方法 获取一组数中的最大值  类数组  
+  // function maxs(){
+  //   // console.log(arguments)
+  //   var max = arguments[0];
+  //   // arguments获取的是函数中实参的个数
+  //   for(var i=0;i<arguments.length;i++){
+  //       if(max<arguments[i]){
+  //         max=arguments[i];
+  //       }
+  //   }
+  //   console.log(max)
+  // }
+  // maxs(2,4,56,7)
+  // var arr = [];
+  // console.log(arr);
+
+  // 字符串 ‘https://www.jd.com/index.html?userName=张三&pwd=123456&id=123456’ 把地址?后面的参数提取出来存放到一个对象中   
+  // 如：{userName:’张三’,pwd:’123456’,id=’123456’}
+  // 分析  url 地址  截取  变成理想的 {userName:’张三’,pwd:’123456’,id=’123456’}
+  // 1、‘https://www.jd.com/index.html?userName=张三&pwd=123456&id=123456’  变成 userName=张三&pwd=123456&id=123456
+  var url = 'https://www.jd.com/index.html?userName=张三&pwd=123456&id=123456';
+  var index = url.indexOf('?')//
+  var obj= {};
+  // console.log(index)
+  // slice是截取字符串，传一个值，是由此位置截取到最后
+
+  var url2 = url.slice(index+1);//userName=张三&pwd=123456&id=123456 
+                                //{userName:’张三’,pwd:’123456’,id=’123456’}  [userName=张三]
+  // console.log(url2)
+  var want = url2.split('&');   //["userName=张三", "pwd=123456", "id=123456"]
+  for(var i = 0;i<want.length;i++){
+    var quitl = want[i].split('=');//["userName", "张三"] ["pwd", "123456"]
+    
+    var key = quitl[0];
+    var val = quitl[1];
+    console.log(key,val);
+    obj[key]=val;  //添加一个属性
+  }
+ console.log(obj)
+//  var obj = {}
+//  obj[name] = "zhangsan";
+  </script>
+</body>
+</html>

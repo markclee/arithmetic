@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+            /*寄生式组合继承
+                -就是把 寄生式组合的一部分 和 构造继承 组合在一起
+
+            */ 
+           function Student(name){
+            //    构造继承
+            // 在函数内执行Person,同时改变Person中this的指向
+            // call将Person中this的指向,变为Student实例
+            // 此方法的缺点,不能继承原型上的
+               Person.call(this);
+           }
+           Student.prototype = Person.prototype 
+           var s = new Student;
+    /*
+    改造代码
+    function Student(name){
+        s.name = 'person'
+        s.eat = function(){}
+    }
+    Student.prototype = Person.prototype 
+    当我new Student的时候
+    {
+        name : 'person'
+        eat : function(){},
+        __proto__ : {
+            constructor : Person,
+            sayHi : function(){},
+            __proto__:Object 
+        }
+    }   
+    缺陷:
+    constructor指向,Student的实例指向了Person的啦
+    当我操作自己的原型的时候,实际上操作的是Person的原型
+    */ 
+    </script>
+</body>
+</html>

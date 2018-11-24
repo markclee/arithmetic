@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<script src="./01.js"></script>
+	<script>
+		/*
+			一：原型继承（原型链继承）
+				--每一个实例对象都会有一个属性叫__proto__
+				--由__proto__串联起来的对象集合就叫做原型链
+				--当我想使用 父类 的属性时候，是通过__proto__找到的
+				--这种形式我们就叫做原型链继承
+			
+			每一个构造函数都有自己的prototype，让自己的实例对象中的__proto__去指向的，
+
+			
+			Student的原型等于Person的实例对象
+			Student.prototype = {
+				name : 'person',
+				eat : function(){},
+				__proto__ : {
+					constructor:Person,
+					sayHi : function(){},
+					__proto__ : object
+				}
+			}
+			当我去new student的时候，得到一个空的对象 等于Student.prototype
+			{
+				Student中没有属性
+				__proto__ : {
+					name : 'person',
+					eat : function(){},
+					__proto__ : {
+						constructor:Person,
+						sayHi : function(){},
+						__proto__ : object
+					}
+				}
+			}
+
+		解释：
+		new Student的时候，Student的实例对象的__proto__==Student.prototype
+		student.prototype == new Person的实例对象
+		Person的实例对象{
+			name : 'person',
+			eat : function(){},
+			__proto__ : {
+				constructor : Person,
+				sayHi : function(){},
+				__proto__ : object
+			}
+
+		} 
+
+		总结:子类的prototype指向父类的实例
+
+		*/
+		function Student(name) {
+
+		}
+		Student.prototype = new Person;
+
+		var s = new Student;
+	</script>
+</body>
+</html>

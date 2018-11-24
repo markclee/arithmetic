@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script src="./01.js"></script>
+	<script>
+		/*三：组合式继承（普通组合式继承）
+			-就是把 原型继承 和 借用构造函数继承 组合在一起使用
+
+			-改造代码 
+				原型继承
+				student.prototype = {
+					name : 'person',
+					eat : function(){},
+					__proto__ : {
+						constructor : Person,
+						sayHi : function(){},
+						__proto__ : object
+					}
+				}
+				构造函数继承
+				function Student(name) {
+					s.name = name || 'person'
+					s.eat = function(){
+						console.log('eatting')
+					}
+				}
+
+
+				原型call继承
+				当我new Student时候
+				{
+					name : 'person',
+					eat : function (){},
+					__proto__ : {  //实例对象的__proto__等于构造函数的__prototype__
+						name : 'person',
+						eat : function(){},
+						__proto__ : {
+							constructor : Person,
+							sayHi : function(){},
+							__proto__ : object
+						}
+				}
+
+				缺点：父类的私有属性会重复出现，因为Person.call了一遍，下边还new了一遍
+
+		*/
+		function Student(name){
+			Person.call(this);
+		}
+
+		Student.prototype = new Person;
+
+		var s = new Student;
+
+
+	</script>
+</body>
+</html>
