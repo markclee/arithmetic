@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var flag = true;
+        // window.addEventListener('scroll', function(){
+        //     if(!flag){
+        //         flag = true
+        //         return
+        //     }
+        //     flag = false
+        //     setTimeout(function(){
+        //         if(this.scrollY > 200){
+        //             this.style.display = 'block'
+        //         }else{
+        //             this.style.display = 'none'
+        //         }
+        //         flag = true
+        //     },300)
+        // }) 
+
+        // var spans = document.getElementsByTagName('span')
+        // var lis = document.getElementsByTagName('li')
+        // for(var i = 0; i < spans.length; i++){
+        //     var target = 0
+        //     var timer = null
+        //     spans[i].onmouseover = function(num){
+        //         return function(){
+        //             clearTimeout(timer)
+        //             timer = setTimeout(function(){
+        //                 spans[target].className = ''
+        //                 lis[target].className = ''
+        //                 spans[num].className = 'current'
+        //                 spans[num].className = 'show'
+        //                 target = num
+        //             }, 300)
+        //         }
+        //     }(i)
+        // }
+        // void function(){
+        //     console.log('abc')
+        // }()
+        // void function(){
+        //     console.log('123')
+        // }()
+
+        // var b;
+        // void  function(){
+        //     var env = {b:1}
+        //     var b = 2
+        //     console.log('in b:', b)
+        //     with(env){
+        //         var b = 3
+        //         console.log('in with b:', b)
+        //     }
+        // }()
+        // console.log('global b', b)
+
+        // // var b = 10;
+        // // (function b() {
+        // //     b = 20;
+        // //     console.log(b);
+        // // })();
+        //     var a;
+        // function fn(a) { // 形参a可以看做为函数体内的一个局部变量
+        //     a = 100;
+        //     var b = 200; //局部变量
+        // }
+        // fn()
+        // console.log(a); //? 报错
+        // // console.log(b); //? 报错
+        // class C {
+        //     showThis() {
+        //         console.log(this);
+        //     }
+        // }
+        // var o = new C();
+        // var showThis = o.showThis;
+        // showThis(); // undefined
+        // o.showThis(); // o
+		
+		
+		// var a = 1;
+		// foo()
+		// var b = 2;
+		// function foo(){
+		// 	console.log(b)
+		// 	console.log(a)
+		// }
+		
+		// var urlArr = window.location.href.split('?')
+		// if(urlArr > 1){
+		// 	var url = urlArr[1].split('/')[urlArr.length-1]
+		// }
+		
+		// var arr = ['a','b','c','d']
+		// for(var key in arr){
+		// 	console.log(key)
+		// 	console.log(typeof key)
+		// }
+
+        function * range(start, stop){
+            for(var i = start; i < stop; i++){
+                console.log(yield i)
+            }
+        }
+        range(0,3)
+    </script>
+</body>
+
+</html>

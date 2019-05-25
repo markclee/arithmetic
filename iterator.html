@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+	//遍历器接口
+        //  1:遍历器(iterator)是一种接口, 为各种不同的数据结构提供统一的访问机制.任何数据结构只要部署iterator接口,就可以完成遍历操作(即依次处理该数据结构的所有成员)
+        //  2:iterator有三种作用
+        //     -为了各种数据结构,提供一个统一的,简便的访问接口
+        //     -使得数据结构的成员按照某种次序排列
+        //     -ES6创建一种新的遍历命令 for of循环,iterator接口提供for of 消费
+        //  3:ES6中 数组可以直接for of循环遍历,对象不行.
+        //     -数组数据结构原生部署了Sysbol.iterator遍历的接口,调用这个接口,返回一个遍历器对象
+        //  4:ES6中,三类数据结构原生具备Iterator接口
+        //     -数组
+        //     -某些类似数组对象
+        //     -Set Map结构
+
+        // 为对象添加iterator
+        //Symbol是一切 非字符串的对象 key的集合
+        let obj = {
+            data: ['hello', 'world'],
+            [Symbol.iterator]() {
+                const self = this;
+                let index = 0;
+                return {
+                    next() {
+                        if (index < self.data.length) {
+                            return {
+                                value: self.data[index++],
+                                done: false
+                            };
+                        } else {
+                            return {
+                                value: undefined,
+                                done: true
+                            };
+                        }
+                    }
+                };
+            }
+        };
+        //---------------------------------------------------------
+        // 类似数组的对象,调用数组的Symbol.iterator方法
+        let iterable = {
+            0 : 'a',
+            1 : 'b',
+            2 : 'c',
+            length : 3,
+            [Symbol.iterator]: Array.prototype[Symbol.iterator]
+        }
+        for(let item of iterable){
+            console.log(item) //'a' 'b' 'c'
+        }
+        //------------------------------------------------------------
+        //使用Symbol.iterator定义for of 对象上的行为
+        var o = new Object()
+        0[Symbol.iterator] = function(){
+            var v = 0
+            return {
+                next: function(){
+                    return {value: v++, done: v>10}
+                }
+            }
+        };
+		//普通对象部署Symbol.iterator方法,没有效果
+		//需要依赖Symbol.iterator接口的场合
+		//	- for of
+		//  - 结构赋值
+		//  - 扩展字符串
+		//  - yeild*_yeild*后面跟的是一个可遍历的结构，它会调用该结构的遍历器接口。
+		//  - 由于数组的遍历会调用遍历器接口，所以任何接受数组作为参数的场合，其实都调用
+		//  - 字符串是一个类似数组的对象，也原生具有Iterator接口。
+		//  - 遍历器对象除了具有next方法，还可以具有return方法和throw方法。
+		//    如果你自己写遍历器对象生成函数，那么next方法是必须部署的，return方法和throw方法是否部署是可选的。
+    </script>
+</body>
+
+</html>
