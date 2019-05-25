@@ -101,7 +101,7 @@ function move(element, target){
 		clearInterval(element.timer);
 	}, 20)
 }
-/*indexOf兼容性写法
+/*indexOf兼容性写法 数组存在
 IE9以前的版本不支持indexOf()方法
 indexOf()是一个方法，通过if(!Array.indexOf)，判断有无此方法，如果没有不报错，返回undefined
 prototype是

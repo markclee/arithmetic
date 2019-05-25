@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<!-- 
+    封装Vue
+        1: 定义一个Vue的类,用于创建Vue实例
+        2: 定义一个负责解析模板内容(视图容器的类) compile
+            +把el的所有子节点,都放在frament中,内存中
+            +在内存中编译frament,将差值表达式,节点进行解析
+            +把fragment一次性 添加到页面 (文档片段在内存中,不在dom树上)
+            +封装一个node2fragment方法
+                -核心方法 document.createDocumentFragment();
+ 
+    
+    实现一个compiler模板解析器,能够对模板中的指令和差值表达式进行解析,并赋予不同的操作
+    实现一个Observer数据监听器,能够对数据对象的所有属性进行监听
+    实现一个Watcher观察者,将compile的解析结果,与Observer所观察的对象连接起来
+    建立关系,在oserver观察到的对象数据变化时,接收通知,同时更新dom
+    创建一个公共的入口函数,接受初始化的配置,并协调上面的三个模块,也就是vue
+ 
+ 
+    
+-->
+<body>
+    <div id="app">
+        <{{msg}}
+        <p v-text="msg" title="我是p">123</p>
+        <div v-html="msg" title="我是div">456</div>
+        <button v-on:click="clickFn">v-on实现</button>
+    </div>
+    <script src="./src/observer.js"></script>
+    <script src='src/compile.js'></script>
+    <script src='src/vue.js'></script>
+    <script>
+        // el可以传入一个DOM对象
+        let app = document.querySelector('#app')
+        const vm = new Vue({
+            el : app,
+            data : {
+                msg : 'hello vue'
+            },
+            methods : {
+                // 在vue的实例中,this应该指向的是,vue实例
+                clickFn(){
+                    console.log(this.name)
+                }
+            }
+        })
+        console.log(vm)
+    </script>
+</body>
+</html>

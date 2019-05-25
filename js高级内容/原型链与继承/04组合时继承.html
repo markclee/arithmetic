@@ -7,6 +7,7 @@
 <body>
 	<script src="./01.js"></script>
 	<script>
+		/*所谓继承,继承的是私有属性,还是原型上的方法,跟本身构造函数内属性还是方法没有关系*/
 		/*三：组合式继承（普通组合式继承）
 			-就是把 原型继承 和 借用构造函数继承 组合在一起使用
 
@@ -21,6 +22,7 @@
 						__proto__ : object
 					}
 				}
+			
 				构造函数继承
 				function Student(name) {
 					s.name = name || 'person'
@@ -49,6 +51,10 @@
 
 		*/
 		function Student(name){
+			/* 
+				this.name = xxx
+				this.age = xxx
+			*/
 			Person.call(this);
 		}
 

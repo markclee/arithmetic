@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+		//----------------------------深拷贝数组对象---------------------------------------
+		//对象深拷贝:
+			newObj = JSON.parse(JSON.stringfy(obj))
+		//数组深拷贝
+			newArr = [...arr]
+			newArr = arr.slice(0)
+		//----------------------------------------------------------------------------------
+        // 使用数组的slice()方法,它返回一个数组,使用call 或者 apply指向伪数组
+        var lis = document.querySelectorAll('li');
+        var arr = Array.prototype.slice.call(lis);
+        // 模拟slice的内部实现
+        Array.prototype.slice = function(start, end){
+            var result = new Array();
+            var start = start || 0;
+            var end = end || this.length;
+            
+            // this指向调用的对象,用了call以后,改变了this的指向
+            // 就指向传进来的对象
+            for(var i = start; i < end; i++){
+                result.push(this[i]);
+            }
+            return result;
+        }
+
+        [].slice.call($('div')).forEach(function(item,index){console.log(item)})
+        var arg = Array.from(arguments);
+		
+		//------------------------------------------------------------------------------------------------------------
+        // Array.from(arr, mapfn, thisArg)方法
+        // +将如下转换为  真正的数组
+        //  -类似数组的对象
+        //    -必须有length属性,如果没有转出为空数组----所以任何有length属性的对象,都可以通过这个方法转换为数组
+        //    -此时,扩展字符串无法转换 ...args
+        //    -length属性,决定转换数组为什么样子
+        //  -可遍历的对象(部署了Iterator接口的, String, ES6新增的Map Set)
+        // +参数
+        //  -数组(必传)
+        //  -函数(类似Map),对数组元素进行操作后再返回数组
+        //  -对this关键字的指向,可选
+
+        let arrayLike = {
+            '0' : 'a',
+            '1' : 'b',
+            '2' : 'c',
+            length : 2
+        };
+        let arr = Array.from(arrayLike) // ["a","b"]
+
+        let arrayLike1 = {
+            '0' : 'a',
+            '1' : 'b',
+            '2' : 'c',
+            length : 4
+        }
+        let arr1 = Array.from(arrayLike1) //["a","b","c",undefined]
+        // 复制数组
+        //  - 接收两个参数, 第二个参数类似map方法作用,对数组的每个元素处理后
+        //    再返回新数组
+        let arr2 = Array.from(arr, item=>item + item) //["aa", "bb", "cc"]
+        // ----- 返回字符串的长度,转换为数组后.length(类似于 ...扩展运算符)
+        function countSymbols(string){
+            return Array.from(string).length
+        }
+        // -----控制函数执行的次数
+        Array.from({length:3}, ()=>console.log("0")) // 0 0 0
+
+    </script>
+</body>
+</html>

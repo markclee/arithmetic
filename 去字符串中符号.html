@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 去除字符串中所有的a
+        // var str = "abaacdbbbssaaa";
+        //["", "b", "", "cdbbbss", "", "", ""]
+        // console.log(str.split('a'))
+        // var a = str.split('a').join('')
+        // console.log(a)
+        //??????
+        // var str = "[tian, 12]";
+        // var data = data.replace("[","")
+        // data = data.replace("]","")
+        // console.log(data)
+        // console.log(typeof a)
+        // let a = 3;
+
+        // var name = 'outer'
+        // var obj = {
+        //     name : 'inner',
+        //     getName : function(){
+        //         // return function(){
+        //         //     return this.name
+        //         // }
+        //         return this.name
+        //     }
+        // }
+        // console.log(obj.getName())
+
+        var name = 'window'
+        var obj = {
+            name : 'inner',
+            fn : function(){
+                console.log(this.name)
+            }
+        }
+        var fun = obj.fn;
+        obj.fn()
+        fun()
+        window.fun()
+    </script>
+</body>
+</html>

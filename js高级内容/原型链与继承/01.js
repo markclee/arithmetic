@@ -8,7 +8,6 @@ Person.prototype.sayHi = function() {
 	console.log('hello world');
 }
 
-
 /*
  
 	--函数名后边的括号有两个作用：
@@ -27,7 +26,5 @@ Person.prototype.sayHi = function() {
 			__proto__ : object
 		}
 	}
-
-
 
 */

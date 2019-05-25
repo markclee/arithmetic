@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<!-- 
+    -substr 
+        obj.substr(start, length)
+        参数:
+            start 必选参数 如果是负数,表示从字符串尾部开始算起始位置
+                -1 指的是 最后一个字符 -2指的是 倒数第二个字符
+            length 可选参数 必须是数值,省略 返回从开始位置 到 结束位置的字符串
+        返回值: 
+            一个新的字符串 包含从start位置开始处的length个字符,没有指定length,是从开始到结尾
+        注释：
+            substr() 的参数指定的是子串的开始位置和长度，因此它可以替代 substring() 和 slice() 来使用。
+    -substring
+
+
+
+    
+    例题:
+        判断一个字符串(str)是否以指定的字符串(target)结尾。 如果是，返回true;如果不是，返回false。
+-->
+<script>
+    function confirmEnding(str, target) {
+        var a = target.length;
+        var s = str.substr(-a);
+        return s == target;
+    }
+    confirmEnding("He has to give me a new name", "name");
+
+   
+</script>
+
+<body>
+    <script>
+
+    </script>
+</body>
+
+</html>

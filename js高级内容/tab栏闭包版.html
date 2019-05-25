@@ -66,6 +66,8 @@
 	</div>
 
 	<script>
+		// 核心思想
+			// 在执行不同动作之间,设置一个间隔,在间隔时候,清除上次的动作,达到函数防抖效果
 	var spans = document.getElementsByTagName('span');
 	var lis = document.getElementsByTagName('li');
 	for(var i = 0; i < spans.length; i++){
@@ -78,18 +80,20 @@
 		var timer = null;
 		spans[i].onmouseover = function (num){
 			return function(){
-						clearTimeout(timer);
-						timer = setTimeout(function(){
-							spans[target].className = '';
-							lis[target].className = '';
-							spans[num].className = 'current';
-							lis[num].className = 'show';
-							target = num;
-						},500)
-						
-					}
+				clearTimeout(timer);
+				timer = setTimeout(function(){
+					spans[target].className = '';
+					lis[target].className = '';
+					spans[num].className = 'current';
+					lis[num].className = 'show';
+					target = num;
+				}, 500)
+			}
 		}(i); //此处要调用函数，所以加小括号，使用函数的返回结果
 		// 因为要函数节流，所以添加定时器，要在return中添加
+
+
+		// 此动作是,鼠标离开div后,不触发最后离开那个div,即不改变颜色
 		spans[i].onmouseout = function(){
 			clearTimeout(timer);
 		}
@@ -116,7 +120,7 @@
 
 
 
-		// 兼容性代买
+		// 兼容性代码
 		function getByClass(cls, ele){
 			var ele = ele || document.body;
 			var arr = [];

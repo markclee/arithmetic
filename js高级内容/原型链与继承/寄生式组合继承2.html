@@ -10,6 +10,9 @@
     <script src='01.js'></script>
     <script>
         // 在寄生式组合继承1的基础上,添加一个中转站, 新的构造函数
+		// 存在三个构造函数
+		// 缺点,会多一层__proto__
+		
         function Student(name){
            
         }
@@ -21,7 +24,7 @@
             /*new Abc {
                 __proto__:{
                     Person.prototype
-                
+					
                 }
             
             }
