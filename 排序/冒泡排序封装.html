@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		/*
+			有序度:
+				- 数组中具有有序关系的元素的对数 a[i] <= a[j] i<j
+			满有序度
+				- 完全有序的数组(从小到大) n(n-1)/2
+			逆序度
+				- 逆序度 = 满有序度-有序度
+			排序的过程
+				- 是一种增加有序度,减少逆序度的过程,达到满有序度,排序结束
+			[2,3,4,1]
+				- 有序度3 满序度 6 逆序度 3
+		*/
+		// 使用自定义构造函数,创建一个对象
+		var CArray = function() {
+			// this指向当前实例对象
+			this.dataStore = [9,5,6,8,2,6,7,3,4,1];
+			this.swap = swap;  //数值交换位置
+			this.flag = flag; //提前退出循环的标志位
+			this.bubbleSort = bubbleSort;  //冒泡排序
+		}
+		function swap(arr, index1, index2) {
+			var temp = arr[index1];
+			arr[index1] = arr[index2];
+			arr[index2] = temp;
+			//表示有数据交换
+			this.flag = true
+		}
+		function bubbleSort(){
+			var data = this.dataStore;
+			var numLength = data.length;
+			// for(var outer = 0; outer < numLength - 1; outer++) {
+			// 	for (var inner = 0; inner < numLength - 1 - outer; inner++){
+			// 		if(data[inner] > data[inner + 1]){
+			// 			this.swap(this.dataStore, inner, inner + 1);
+			// 		}
+			// 	}
+			// }
+			for (var outer = numLength; outer>=2; outer--) {
+				// flag为false,表示提前退出冒泡的标志位
+				this.flag = false
+				for(var inner = 0; inner <= outer - 1; inner++){
+					if(data[inner] > data[inner + 1]){
+						this.swap(this.dataStore, inner, inner+1)
+					}
+				}
+				//表示没有数据交换,提前退出
+				if(!this.flag){
+					break
+				}
+			}	
+		}
+		var aa = new CArray();
+		aa.bubbleSort();
+		console.log(aa.dataStore);
+	</script>
+</body>
+</html>

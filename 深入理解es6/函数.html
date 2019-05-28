@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //     // 函数参数默认值
+    //     function makeRequest(url, timeout, callback){
+    //         timeout = (typeof timeout !== "undefined") ? timeout : 2000
+    //         callback = (typeof timeout !== "undefined") ? callback : function(){}
+    //         //其余函数部分
+    //     }
+    //     // 函数参数默认值 es6
+    //     // 如果调用函数时,传入三个参数,则不使用默认值
+    //     function makeRequest(url, timeout = 2000, callback=function(){})
+    //     //  使用timeout默认值
+    //     function makeRequest('/login', undefined)
+    //     // 不使用timeou默认值
+    //     function makeRequest('./login', null, callback)
+    //     /*
+    //         +非严格模式下,函数命名参数的变化,会体现在arguments对象中(es5中)
+    //         +默认参数表达式 ---非原始值传参
+    //             - 通过函数执行,得到默认参数
+    //     */
+    //     function getVal(){
+    //         return 5
+    //     }
+    //     function add(first, second=getVal()){
+    //         return first + second
+    //     }
+    //     console.log(1,1) //2 如果传入了参数,则second值为 2
+    //     console.log(1) //6 如果没传入参数, 则调用getVal函数,获取second的值
+    //     /*
+    //         默认参数临时死区:
+    //             -TDZ,默认参数临时死区,在这里参数不可以被访问
+    //             -定义参数时候,为每个参数创建一个新的标识符绑定,,该绑定在初始化之前不可以被引用,访问会出错
+    //             -当调用函数时候,通过传入的值,参数默认值,初始化参数
+    //     */
+    //     function add(first = second, second){
+    //         return first + second
+    //     }
+    //     console.log(add(1,1)) //2
+    //     console.log(add(undefined, 1)) //b报错
+    //     /*  调用
+    //             let first = 1;
+    //             let second = 1;
+    //         调用
+    //             let first = second
+    //             let second = 1
+    //         当first初始化时候,second还未初始化,导致程序抛出错误,此时second在临时死区
+    //         **所有引用临时死区中绑定的行为,都会报错**
+    //         注意:
+    //             + 函数参数有自己的作用域和临时死区,与函数体的作用域是各自独立的
+    //             + 参数的默认值,不可以访问函数体内声明的变量
+    //     */
+    //   //----------------------------------使用arguments模拟剩余参数(不定参数)----------------------------------------
+        // 模拟Underscore.js库中的pick()方法,返回一个给定对象的副本,包含原始对象属性的特定子集
+        // 第一个参数为被复制属性的源本对象,其它参数是被复制属性的名称
+        function pick(object){
+            let result = Object.create(null)
+
+            //第二个参数开始 pick挑选
+            //第一个参数,是要传入的对象
+            for(let i = 1, len = arguments.length; i < len; i++){
+                //result是一个对象
+                result[arguments[i]] = object[arguments[i]]
+            }
+            return result
+        }
+
+        let book = {
+            title:'Understanding ECMAScript6',
+            author:'Nicholas c.zakas',
+            year:2016
+        };
+        let bookData = pick(book, "author", "year")
+        console.log(bookData.author) //Nicholas c.zakas
+        console.log(bookData.year)//2016
+
+        /*不定参数
+            -...表示不定参数
+            -数组
+            -包含自他之后的所有参数
+            -通过数组名,逐一访问里边的参数       
+        */
+       function pick(object, ...keys){
+            let result = Object.create(null)
+            console.log(arguments.length) //3
+            for(let i = 0, len=keys.length; i < len; i++){
+                result[keys[i]] = object[keys[i]]
+            }
+            return result
+       }    
+       console.log(pick(book,'author','year').author) ///Nicholas c.zakas
+       console.log(pick.length) //1 不定参数,不影响函数的length,pick只有object,所以长度为1
+	   /*
+		函数的length属性,函数形参的个数
+			-形参的数量,不包含不定参数(剩余参数)的个数,不包含具有默认值的参数,且仅包含第一个具有默认值之前的参数的个数
+	   */
+    </script>
+</body>
+</html>
