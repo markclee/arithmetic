@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function *test(){} *必须有空格 类似于promise 也是为了解决异步的
+        // 生成器函数,调用后,返回一个生成器函数对象,配合yield,可以实现,在函数中走走停停
+        // yield 可以往里传参,用next给yield传参...第一个next()对于传参来说是作废的
+     
+        // function *show(){
+        //     alert('a')
+        //     let c = yield
+        //     alert('b')
+        //     alert(c)
+        // }
+        // let gen = show()
+        // gen.next(1)// 没法给yield传参
+        // gen.next(2)
+        
+
+        // yield 可以往外传参,返回一个中间结果
+        // function *show(){
+        //     alert('a')
+        //     yield 12
+        //     alert('b')
+        // }
+        // let gen = show()
+        // let res1 = gen.next() //{value:12,done:false}
+        // console.log(res1)
+        // let res2 = gen.next() //{value:undefined,done:true}
+        // console.log(res2)
+        /*---------------------------------generator解决异步操作-------------------*/
+        
+    </script>
+</body>
+</html>

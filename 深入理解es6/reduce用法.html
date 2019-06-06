@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //只要目标是将数组聚合为唯一的元素时
+        var arr = [{
+            id: 1,
+            type: 'A',
+            total: 3
+        }, {
+            id: 2,
+            type: 'B',
+            total: 5
+        }, {
+            id: 3,
+            type: 'E',
+            total: 7
+        }, ]
+        //-----------------------统计 total 的总和---------------------
+
+        // function sum(arr){
+        //     let sum = 0
+        //     for(let i = 0; i < arr.length; i++){
+        //         const { total } = arr[i]
+        //         sum += total
+        //     }
+        //     return sum
+        // }
+        console.log(arr.reduce((sum, {
+            total
+        }) => {
+            return sum + total
+        }, 0))
+        //-------------------------聚合为字符串-------------------------
+        console.log(arr.reduce((str, {
+            id,
+            type
+        }) => {
+            return str += `id:${id},type:${type}`
+        }, ''))
+
+        //------------------聚合为对象---------------------------------
+        // function changeToObj(arr) {
+        //     const res = {};
+        //     arr.forEach(({
+        //         id,
+        //         type,
+        //         total
+        //     }) => {
+        //         res[id] = {
+        //             type,
+        //             total
+        //         };
+        //     })
+        //     return res;
+        // }
+        // console.log(changeToObj(arr))
+
+        console.log(arr.reduce((res, {id, type, total})=>{
+            res[id] = {
+                type,
+                total
+            }
+            return res
+        }, {}))
+    </script>
+</body>
+
+</html>

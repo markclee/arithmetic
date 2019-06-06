@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+        核心:promise里边的then函数仅仅是注册了后续需要执行的代码,真正执行是在resolve方法里边执行的
+            即 resolve处是函数调用,then处是resolve方法的函数声明
+        
+        +javascript引擎常驻内存中,它等待我们(宿主)把js代码或者函数传递给它执行
+        +es3 javascript没有执行异步代码的能力,宿主环境传递给js引擎一段代码,引擎就会按照顺序执行,这个任务是宿主发起的任务  
+        +es5 引入promise,不需要宿主(浏览器安排),js引擎可以自己发起任务
+        +宿主发起的任务 称为宏观任务 把js引擎发起的任务 称为微观任务
+        +javascript引擎等待宿主环境分配宏观任务,在操作系统中,这个等待的行为称为事件循环
+            while(true){
+                r = wait()
+                execute(r)//执行
+            }
+        
+        +每次执行的过程, 是一个宏观任务,宏观任务相当于事件循环
+        +在宏观任务中,js的promise还会产生异步代码,js必须保证这些异步代码在一个宏观任务中完成
+        +因此宏观任务中又包含一个微观任务队列
+        +Promise永远是在队列尾部添加微观任务,setTimeout等宿主API 添加宏观任务
+
+        /*
+            Promise是javaScript语言提供的一种标准化异步管理方式
+            设计思想,需要进行io,等待,其它异步操作的函数,不返回结果
+            返回一个承诺,函数的调用方可以在合适的时机,选择承诺兑现(通过Promise的then方法)
+        
+            var r = new Promise(function(resolve, reject){
+                console.log('a')
+                resolve()
+            })
+            r.then(()=>console.log('c'))
+            console.log('b')
+            
+            输出结果abc,因为resolve是异步的,所以c无法在b之前执行
+
+        */
+        /*
+            var r = new Promise(function(resolve, reject)=>{
+                console.log('a')
+                resolve()
+            })
+            setTimeout(()=>console.log('d'), 0)
+            r.then(()=>console.log('c'))
+            console.log('b')
+            输出结果: abcd Promise 产生的是javascript引擎内部的微观任务
+            setTimeout是浏览器api,产生宏观任务
+        */ 
+        /*----------------------------宏观任务,晚于围观任务注册---------------------------------*/ 
+        /*此方法 强制 执行1秒的c1输出,保证c2在d之后添加到任务队列
+            
+        
+        */
+        setTimeout(()=>console.log('d'), 0)
+        var r = new Promise(function(resolve, reject){
+            resolve()
+        }).then(()=>{
+            var begin = Date.now()
+            while(Date.now() - begin < 1000) //1秒内 只执行输出c1操作
+            console.log('c1')
+            //1秒后执行 后边操作
+            new Promise((resolve, reject)=>{
+                resolve()
+            }).then(()=>console.log('c2'))
+        })
+        // var promise = new Promise(function(resolve,reject){
+        //     if(){
+        //         resolve(value)
+        //     }else{
+        //         reject(error)
+        //     }
+        // })
+        // promise.then(function(value){
+
+        // }, function(value){})
+
+        /*-----------------返回一个 给定对象的自身 可枚举 属性 组成的数组, 排列顺序,与for in遍历一样---------------------*/ 
+        // var data = {a:1,b:2,c:3,d:4,e:5}
+        // // console.log(data)
+        // console.log(Object.keys(data))
+        // Object.keys(data).map((key,item)=>{
+        //     console.log(key)
+        //     console.log(item)
+        // })
+
+    </script>
+</body>
+</html>

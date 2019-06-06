@@ -107,12 +107,74 @@
 		// 	console.log(typeof key)
 		// }
 
-        function * range(start, stop){
-            for(var i = start; i < stop; i++){
-                console.log(yield i)
+        // function * range(start, stop){
+        //     for(var i = start; i < stop; i++){
+        //         console.log(yield i)
+        //     }
+        // }
+        // range(0,3)
+
+        
+            // function *fn() {
+            //     yield console.log(a)
+            //     yield console.log(a)
+            // }
+
+            // var a = 10
+
+            // var obj = fn()
+
+            // a = 20
+
+            // obj.next()
+
+            // a = 30
+            // obj.next()
+
+
+            // function* somewords() { 
+            //     yield "hello"; 
+            //     yield "world"; 
+            // } 
+            // for (var word of somewords()) { 
+            //     alert(word); 
+            // } 
+
+
+            // function fn (){
+            //     this.name
+            //     console.log(this)
+            // }
+            // var obj = {
+            //     name : "obj",
+            //     fn : fn
+            // }
+            // fn()
+            // obj.fn()
+            // var fn2 = obj.fn;
+            // fn2()
+
+            // try{
+            //     console.log(1)
+            //     setTimeout(()=>{
+            //         console.log(2)
+            //     },100)
+            //     setTimeout(()=>{
+            //         console.log(3)
+            //         throw new Error(5)
+            //     })
+            //     console.log(4)
+
+            // }catch (e){
+            //     console.log(e)
+            // }
+            var arr = [1,[2,[3,4],5],6]
+            // var arr = [1,1,1,1]
+            function a(arr){
+                let newArr = arr.toString().split(',')
+                return newArr
             }
-        }
-        range(0,3)
+            console.log(a(arr))
     </script>
 </body>
 

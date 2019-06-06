@@ -1,0 +1,44 @@
+{
+  "_from": "yield-runner-blue",
+  "_id": "yield-runner-blue@0.0.4",
+  "_inBundle": false,
+  "_integrity": "sha1-vAf7V92vdmxeQDzmYO49Hllvujw=",
+  "_location": "/yield-runner-blue",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "yield-runner-blue",
+    "name": "yield-runner-blue",
+    "escapedName": "yield-runner-blue",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npm.taobao.org/yield-runner-blue/download/yield-runner-blue-0.0.4.tgz",
+  "_shasum": "bc07fb57ddaf766c5e403ce660ee3d1e596fba3c",
+  "_spec": "yield-runner-blue",
+  "_where": "C:\\Users\\marklee\\Desktop",
+  "author": {
+    "name": "blue"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "This is runner to run generator(yield) step by step for myself. Of course, you can use this module as you wish.",
+  "keywords": [
+    "yield",
+    "runner",
+    "generator"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "yield-runner-blue",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.0.4"
+}

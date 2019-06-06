@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+        
+
+    <script>
+        //类与构造函数在es6之前是一个东西
+        // 注意:class里边的函数,没有冒号
+
+        // class关键字,构造器分开
+        // class里边直接加方法
+        // 继承是其特点
+        class User{
+          constructor(name,age){
+              this.name = name;
+              this.age = age;
+          }
+          showName(){
+            alert(this.name)
+          }
+          showAge(){
+            alert(this.age)
+          }
+        }
+        class VipUser extends User{
+            constructor(name, age, level){
+                // 超类 父类
+                super(name, age)
+                
+                this.level = level
+            }
+            showLevel(){
+                alert(this.level)
+            }
+        }
+    </script>
+</body>
+</html>
