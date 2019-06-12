@@ -107,6 +107,7 @@
             let lastTime = 0
             return function (...args) {
                 // 当前时间
+                // 用new Date()参与运算,会自动转换为当前的ms数
                 let now = +new Date()
                 // 当前时间和上一次执行函数时间对比
                 // 如果差值大于设置的等待时间,就执行函数
@@ -119,11 +120,28 @@
                 }
             }
         }
-        setInterval(
-            throttle(() => {
-                console.log(1)
-            }, 500), 1
-        )
+        // setInterval(
+        //     throttle(() => {
+        //         console.log(1)
+        //     }, 500), 1
+        // )
+
+
+
+        const debounce = (func, wait=50)=>{
+            let lastTime = 0
+            return function(...args){
+                let now = +new Date()
+                console.log(args)
+                if(now - lastTime > wait){
+                    lastTime = now
+                    func.apply(this, args)
+                }
+            }
+        }
+        setInterval(debounce(()=>{
+            console.log(1);
+        }, 500)(1,2), 1000)
     </script>
 </body>
 

@@ -78,6 +78,7 @@
 		// 事件里层的i与外层的不一样，使用闭包版本就不需要i了
 		// 函数节流，避免重复触发onmouseover
 		var timer = null;
+		//当鼠标移动时候,触发的回调函数
 		spans[i].onmouseover = function (num){
 			return function(){
 				clearTimeout(timer);
@@ -97,9 +98,6 @@
 		spans[i].onmouseout = function(){
 			clearTimeout(timer);
 		}
-
-
-
 
 		// 							 i 实际参数
 		// span[i].onmouseover = tab(i);
