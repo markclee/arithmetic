@@ -1,0 +1,77 @@
+京东安联面试题
+    1: vue中 不同权限人 显示不同菜单 怎么实现
+    2: 什么是闭包,js闭包,内存常驻的原因,垃圾回收机制
+        - function func () {
+            const obj = {}
+            return obj
+        }
+        const a = func()
+        func()
+    3: event loop
+        - promise setTimeout执行顺序
+        - setTimeout最小执行单位 4ms
+        - 浏览器刷新频率
+    4: 0.1+0.2 == 0.3 成立吗?怎么处理
+    5: 对象深拷贝问题,什么是深拷贝,什么是浅拷贝
+       怎么深拷贝
+    6: 判断数据类型是不是数组
+    7:typeof返回值 number string function object boolen undefined symbol
+    8:instanceof 原理
+    9:call apply bind
+    10:手写一个bind
+    11:this指向问题
+    12:new的作用
+    13:2018-06-12 转换为 2018年6月12日 正则实现
+    14:页面布局,一行三个div,1与2间隔20px,2与3间隔20px,三个div自适应
+    15:vuex
+    16:自定义指令钩子函数
+    17:vuerouter钩子函数
+    18:vuerouter有几种模式
+    19:前端css兼容性问题
+    20:虚拟dom怎么挂载到页面 生成dom tree的api
+    
+
+css基础搞明白
+技术方面,要深入的理解,不要只是知道概念
+外包京东金融面试
+拷贝继承中 object.create({obj})是什么
+new的作用
+object.assinc是什么
+css3 折角怎么做
+jsonp跨域后,cookie没有带到后台,怎么设置(with credentd????)
+e.currentTarget
+e.target
+addEventListener() 第三个参数是false(冒泡阶段执行) true是捕获阶段执行
+手写使用promise 在1s后执行 成功回调
+
+京东白条面试问题
+            用vue封装一个input组件,旁边一个点击按钮
+            模板引擎
+            三次递归 输出函数题
+            axios发送请求携带cookie 怎么设置
+            vuerouter 怎么配置
+            axios的底层实现原理
+            fetch与axios的区别
+            ajax与axios的区别
+
+            axios向后台发送数据携带cookie, 配置方式
+            浏览器优化,网页优化内容
+            强缓存 弱缓存怎么做
+            页面都是直接刷新的吗?
+            前端的数据统计,前端埋点,前端曝光.首屏白屏事件
+            vuerouter 模式 hash history模式
+            es6中的语法糖
+            隐士转换
+            拉平数组
+            node.js 前台服务器
+            多端框架是什么
+            flutter
+            前端输入url之后,所干的事
+            一个页面,拉回资源,督导css进行解析,读到javascript代码会不会阻断
+            script标签写到必须写到header里边,怎么解决这个问题
+            AMD CMD 是什么 模块化
+https://segmentfault.com/u/bradwang
+https://github.com/airuikun/Weekly-FE-Interview/issues/4
+https://segmentfault.com/a/1190000011142875
+https://coding.imooc.com/class/chapter/129.html
+

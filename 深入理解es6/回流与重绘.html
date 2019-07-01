@@ -27,7 +27,8 @@
         -当rende tree中的一部分(全部)因为元素的规模尺寸,布局,隐藏等改变而需要重新构建
         -每个页面至少需要一次回流,就是在页面第一次加载的时候
         -在回流过程中,浏览器会使渲染树中受到影响的部分失效,并重新构造这部分渲染树
-        - 弯沉回流后,浏览器会重新绘制受影响的部分到屏幕中,该过程称为重绘
+        -完成回流后,浏览器会重新绘制受影响的部分到屏幕中,该过程称为重绘
+        -不一定每次回流都是立即执行,而是积攒一批,也成异步reflow
     重绘:
         - 当rendertree中的一些元素需要更新属性,而这些属性只影响元素的外观,风格,不影响布局,
             比如 background-color 则称为重绘
@@ -63,7 +64,18 @@
     
     */    
    
-   
+   /*
+    https://www.jianshu.com/p/1804ef41f9ba
+    https://www.jianshu.com/p/1804ef41f9ba
+    
+    visibility hidden, display none, v-if, v-show的总结
+        render tree = DOM Tree + CSSOM
+        visibility:hidden 隐藏占位置----重绘(CSSOM)
+        display:none 隐藏不占位置----回流+重绘(DOM Tree + CSSOM)
+
+        v-if 销毁dom树,达到让元素隐藏显示的效果,这里的开销大,因为要销毁整个dom树?????  
+        v-show 更改display的属性 达到效果----重绘+回流(DOM Tree + CSSOM)这里的开销相对小,因为是局部渲染DOM树
+    */
    </script> 
 </body>
 </html>

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
 </head>
+
 <body>
 	<script>
 		/*什么是闭包:
@@ -21,28 +23,32 @@
 		*/
 		//自执行函数,匿名函数自调用,存在弊端,两个自执行函数之间必须写分号(区分开,谁调用的谁)
 		//因为自执行函数不需要return值,所以可以使用void的新写法,更符合语义
-		void function(){
+		void
+		function () {
 			console.log('123')
 		}()
-		
+
 		//with作用域里,访问对象的属性,不需要写对象前缀
 		var b;
-        void function(){
-            var env = {b:1}
-            b = 2//此处篡改了b的值,根据作用局查找规则,由内向外,里边的可以访问外边的变量,外边的不能访问里边的变量
+		void
+		function () {
+			var env = {
+				b: 1
+			}
+			b = 2 //此处篡改了b的值,根据作用局查找规则,由内向外,里边的可以访问外边的变量,外边的不能访问里边的变量
 			//var b = 2 不会篡改b的值
-            console.log('in b:', b)  //2
-            with(env){
-                var b = 3
-                console.log('in with b:', b)  //3
-            }
-        }()
-        console.log('global b', b) // 2
+			console.log('in b:', b) //2
+			with(env) {
+				var b = 3
+				console.log('in with b:', b) //3
+			}
+		}()
+		console.log('global b', b) // 2
 		//------------------------------------------------------------------------------------------------------
 		/*js中切换 上下文最主要的场景就是函数调用*/
-		
-		
-		/**************************利用闭包在函数外部获取函数内的值****************************/ 
+
+
+		/**************************利用闭包在函数外部获取函数内的值****************************/
 		/*--当函数体内有一些数据或内容被函数外部占用的时候，这个空间不会被销毁，这个不被销毁的空间叫做闭包
 			
 			--这个空间不被销毁
@@ -75,7 +81,7 @@
 		// console.log(b);
 
 
-/******************************************/
+		/******************************************/
 		// function fn(){
 		// 	var num = 10;
 
@@ -100,17 +106,17 @@
 
 
 		/**************代码糖写法***************/
-		function fn(){
+		function fn() {
 			var num = 10;
 			var num2 = 100;
 			return {
-				get getNum(){
+				get getNum() {
 					return num;
 				},
-				set setNum(n){
+				set setNum(n) {
 					num += n;
 				},
-				get getNum2(){
+				get getNum2() {
 					return num2;
 				}
 			}
@@ -123,13 +129,58 @@
 		console.log(a.getNum)
 		console.log(a.getNum2)
 
-		 // 闭包作用：
-		 // 1：保护私有变量，防止全局变量污染
-		 // 2：让函数外部可以操作函数内部的属性或者数据
-		 // 3：操作性能很好的封装底层代码
+		// 闭包作用：
+		// 1：保护私有变量，防止全局变量污染
+		// 2：让函数外部可以操作函数内部的属性或者数据
+		// 3：操作性能很好的封装底层代码
 
-		 // 沙箱模式：代码糖的的闭包写法就是沙箱模式
-		 // 科利华函数 callback回调函数
+		// 沙箱模式：代码糖的的闭包写法就是沙箱模式
+		// 科利华函数 callback回调函数
+		/*-----------------------------------闭包的应用场景----------------------------------*/
+		//实例中的for循环另一种形式
+		//+ ! ~等其它一元操作符       (function(){console.log('foo')})()    (function(){console.log('foo')}())
+		//没有加好,解析器认为是function是函数声明开始,()会导致语法错误,function前边+号,变成函数表达式,()变成立即执行函数
+		document.body.innerHTML = "<div id=div1>aaa</div>" + "<div id=div2>bbb</div>" + "<div id=div3>ccc</div>";
+		for (var i = 1; i < 4; i++) {
+			! function (i) {
+				let div = document.getElementById('div' + i);
+				console.log(div)
+				div.addEventListener('click', function () {
+					alert(i)
+				});
+			}(i)
+		}
+		//结果缓存
+		//说明：开发中会碰到很多情况，设想我们有一个处理过程很耗时的函数对象，每次调用都会花费很长时间
+		//，那么我们就需要将计算出来的值存储起来，当调用这个函数的时候，首先在缓存中查找，如果找不到，
+		//则进行计算，然后更新缓存并返回值，如果找到了，
+		//直接返回查找到的值即可。闭包正是可以做到这一点，因为它不会释放外部的引用，从而函数内部的值可以得以保留。
+		var CachedSearchBox = (function () {
+			var cache = {},
+				count = [];
+			return {
+				attachSearchBox: function (dsid) {
+					if (dsid in cache) { //如果结果在缓存中    
+						return cache[dsid]; //直接返回缓存中的对象    
+					}
+					var fsb = new uikit.webctrl.SearchBox(dsid); //新建    
+					cache[dsid] = fsb; //更新缓存    
+					if (count.length > 100) { //保正缓存的大小<=100    
+						delete cache[count.shift()];
+					}
+					return fsb;
+				},
+
+				clearSearchBox: function (dsid) {
+					if (dsid in cache) {
+						cache[dsid].clearSelection();
+					}
+				}
+			};
+		})();
+
+		CachedSearchBox.attachSearchBox("input");
 	</script>
 </body>
+
 </html>

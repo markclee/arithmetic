@@ -43,6 +43,7 @@
             type: 'E',
             total: 7
         }, ]
+       
         //-----------------------统计 total 的总和---------------------
 
         // function sum(arr){
@@ -83,7 +84,7 @@
         // }
         // console.log(changeToObj(arr))
 
-        console.log(arr.reduce((res, {
+       arr.reduce((res, {
             id,
             type,
             total
@@ -93,7 +94,7 @@
                 total
             }
             return res
-        }, {}))
+        }, {})
 
 
         /*------------------------将数组转化为对象--------------------------------
@@ -123,7 +124,7 @@
         }
         const userObj = userList.reduce(keyByUsernameReducer,{})
         console.log(userObj)
-        // 扁平化数组
+        // 扁平化数组?????
         Array.prototype.flatMap = function(f){
             const reducer = (preV, curV)=>preV.concat(f(curV))
             return this.reduce(reducer, [])
@@ -152,6 +153,12 @@
         // 如果参数不是数组,不管参数个数有多少个,push 和 concat都会直接把参数添加到数组最后
         // 如果参数是数组,push就会直接把数组添加到原数组后, concat会把数组中的值取出来添加到原数组后 
         /*--------------------------纯数字数组,toString split(',')------------------------------------*/
+        function flatArr1(arr){
+            return arr.toString().split(',').map(function(item){
+                return Number(item)
+            })
+        }
+        console.log(flatArr1([1,2,3,[4,'5',[6,7]],8]))
         /*------------------------------使用reduce和concat方法, 二维数组--------------------------------*/ 
         var twoArr = [['mu','zi'],['dig','big'],['lucky','jiji']];
         const oneArr = twoArr.reduce((preV, curV)=>{
@@ -169,6 +176,56 @@
             },[])
         }
         console.log(twoArr.flatArr())
+        /*---------------------------扩展运算符------------------------------------------------------------*/
+        function flatArr8(arr){
+            while(arr.some(item=>Array.isArray(item))){
+                arr = [].concat(...arr)
+            }
+            return arr
+        }
+        var arr8 = [1, 2, 3, [4, ['a', 5, [6]], 7]];
+        console.log(flatArr8(arr8))
+
+
+
+        /*******************处理数据*******************/
+        var obj = {
+            "code": 0,
+            "msg": "成功",
+            "data" : [{
+                        "id": 1,
+                        "createTime": "2018-10-12T02:12:01.000+0000",
+                        "updateTime": "2019-04-16T07:04:42.000+0000",
+                        "menuName": "系统管理",
+                        "level": "1",
+                        "parentId": null,
+                        "contentHtml": "#",
+                        "sort": 1,
+                        "state": 1,
+                        "createName": "admin",
+                        "updateName": "王明秀"
+                    },
+                    {
+                        "id": 2,
+                        "createTime": "2018-10-12T02:09:08.000+0000",
+                        "updateTime": "2019-01-03T02:49:06.000+0000",
+                        "menuName": "菜单管理",
+                        "level": "2",
+                        "parentId": "1",
+                        "contentHtml": "menu.html",
+                        "sort": 1,
+                        "state": 1,
+                        "createName": "admin",
+                        "updateName": null
+                    }]
+        }
+        
+        var tmpArr = obj.data
+        var newArr = []
+        tmpArr.forEach((item, index)=>{
+            newArr.push(item.contentHtml)
+        })
+        console.log(newArr)
     </script>
 </body>
 

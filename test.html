@@ -9,6 +9,18 @@
 </head>
 
 <body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
     <script>
         // var flag = true;
         // window.addEventListener('scroll', function(){
@@ -86,26 +98,26 @@
         // var showThis = o.showThis;
         // showThis(); // undefined
         // o.showThis(); // o
-		
-		
-		// var a = 1;
-		// foo()
-		// var b = 2;
-		// function foo(){
-		// 	console.log(b)
-		// 	console.log(a)
-		// }
-		
-		// var urlArr = window.location.href.split('?')
-		// if(urlArr > 1){
-		// 	var url = urlArr[1].split('/')[urlArr.length-1]
-		// }
-		
-		// var arr = ['a','b','c','d']
-		// for(var key in arr){
-		// 	console.log(key)
-		// 	console.log(typeof key)
-		// }
+
+
+        // var a = 1;
+        // foo()
+        // var b = 2;
+        // function foo(){
+        // 	console.log(b)
+        // 	console.log(a)
+        // }
+
+        // var urlArr = window.location.href.split('?')
+        // if(urlArr > 1){
+        // 	var url = urlArr[1].split('/')[urlArr.length-1]
+        // }
+
+        // var arr = ['a','b','c','d']
+        // for(var key in arr){
+        // 	console.log(key)
+        // 	console.log(typeof key)
+        // }
 
         // function * range(start, stop){
         //     for(var i = start; i < stop; i++){
@@ -114,67 +126,112 @@
         // }
         // range(0,3)
 
+
+        // function *fn() {
+        //     yield console.log(a)
+        //     yield console.log(a)
+        // }
+
+        // var a = 10
+
+        // var obj = fn()
+
+        // a = 20
+
+        // obj.next()
+
+        // a = 30
+        // obj.next()
+
+
+        // function* somewords() { 
+        //     yield "hello"; 
+        //     yield "world"; 
+        // } 
+        // for (var word of somewords()) { 
+        //     alert(word); 
+        // } 
+
+
+        // function fn (){
+        //     this.name
+        //     console.log(this)
+        // }
+        // var obj = {
+        //     name : "obj",
+        //     fn : fn
+        // }
+        // fn()
+        // obj.fn()
+        // var fn2 = obj.fn;
+        // fn2()
+
+        // try{
+        //     console.log(1)
+        //     setTimeout(()=>{
+        //         console.log(2)
+        //     },100)
+        //     setTimeout(()=>{
+        //         console.log(3)
+        //         throw new Error(5)
+        //     })
+        //     console.log(4)
+
+        // }catch (e){
+        //     console.log(e)
+        // }
+        // var arr = [1,[2,[3,4],5],6]
+        // // var arr = [1,1,1,1]
+        // function a(arr){
+        //     let newArr = arr.toString().split(',')
+        //     return newArr
+        // }
+        // console.log(a(arr))
+
+        // var arrays = [];
+
+        // for (var i = 0; i < 3; i++) {
+        //     arrays.push(function () {
+        //         console.log('>>> ' + i); //all are 3
+        //     });
+        // }
+        // console.log(arrays[0]())
+        // console.log(arrays[1]())
+        // console.log(arrays[2]())
+
+        // setTimeout(() => {
+        //     console.log(1)
+        // })
+        // let p1 = new Promise((resolve) => {
+            
+        //     resolve(3)
+        //     console.log(2)
+        // })
+        // p1.then((res) => {
+        //     console.log(res)
+        // })
+        // console.log(4)
+
+        // function numberLog() {
+        //     for (var i = 1;i <= 10;i++) {
+        //        (function(count){
+        //            setTimeout(()=>{
+        //                console.log(count)
+        //            })
+        //        })(i)
+        //     }
+        // }
+        // numberLog();
+        // [1,[2,3,[4]],5]
         
-            // function *fn() {
-            //     yield console.log(a)
-            //     yield console.log(a)
-            // }
-
-            // var a = 10
-
-            // var obj = fn()
-
-            // a = 20
-
-            // obj.next()
-
-            // a = 30
-            // obj.next()
 
 
-            // function* somewords() { 
-            //     yield "hello"; 
-            //     yield "world"; 
-            // } 
-            // for (var word of somewords()) { 
-            //     alert(word); 
-            // } 
 
+        let lis = [...document.querySelectorAll('li')]
+        console.log(lis)
 
-            // function fn (){
-            //     this.name
-            //     console.log(this)
-            // }
-            // var obj = {
-            //     name : "obj",
-            //     fn : fn
-            // }
-            // fn()
-            // obj.fn()
-            // var fn2 = obj.fn;
-            // fn2()
-
-            // try{
-            //     console.log(1)
-            //     setTimeout(()=>{
-            //         console.log(2)
-            //     },100)
-            //     setTimeout(()=>{
-            //         console.log(3)
-            //         throw new Error(5)
-            //     })
-            //     console.log(4)
-
-            // }catch (e){
-            //     console.log(e)
-            // }
-            var arr = [1,[2,[3,4],5],6]
-            // var arr = [1,1,1,1]
-            function a(arr){
-                let newArr = arr.toString().split(',')
-                return newArr
-            }
-            console.log(a(arr))
+        var arr = [1,2,[3,4,[5,6,[7,8],9],10]];
+        console.log(...arr)
     </script>
 </body>
 

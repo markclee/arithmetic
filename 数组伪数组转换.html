@@ -14,7 +14,7 @@
 		//数组深拷贝
 			newArr = [...arr]
 			newArr = arr.slice(0)
-		//----------------------------------------------------------------------------------
+		//---------------------------------数组 伪数组转换 -----------------------------------
         // 使用数组的slice()方法,它返回一个数组,使用call 或者 apply指向伪数组
         var lis = document.querySelectorAll('li');
         var arr = Array.prototype.slice.call(lis);
@@ -73,7 +73,9 @@
         }
         // -----控制函数执行的次数
         Array.from({length:3}, ()=>console.log("0")) // 0 0 0
-
+        /*********************将伪数组,直接转换为真数组*********************************/
+        let lis = [...document.querySelectorAll('li')]
+        
     </script>
 </body>
 </html>
