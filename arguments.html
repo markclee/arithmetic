@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 每个函数都有一个Arguments对象实例的arguments,他引用这函数的实参,可以用[]的形式引用
+        // arguments中的元素 arguments.length为函数实参的个数,arguments.callee引用函数自身
+        // Arguments对象是一个伪数组对象,他只有数组的length方法,可以用argument[i]访问对象中的属性
+        // function argTest(a,b,c){
+        //     var t = arguments.length; //实参的个数
+        //     var e = argTest.length; //形参的个数
+        //     console.log(t)
+        //     console.log(e)
+        // }
+        // argTest(1,2) // 2 3
+        // argTest(1,2,3) // 3 3
+        // argTest(1,2,3,4)//4 3
+
+        // // Arguments对象的参数访问,使用arguments[i]的来访问,函数所传的参数
+        // function argTest(a,b,c){
+        //     var arg = []
+        //     for(let i = 0; i < arguments.length; i++){
+        //         arg.push(arguments[i])
+        //     }
+        //     console.log(arg)
+        // }
+        // argTest(1,2)
+        // argTest(1,2,3)
+        // argTest(1,2,3,4)
+    
+        // arguments.callee   调用函数本身,当函数正在执行的时候调用,可以实现方法的递归调用
+        // function argTest(a,b,c){
+        //     var e = arguments.callee.toString()
+        //     console.log(e)
+        // }
+        // argTest()
+
+        // Function的caller属性
+        // 指向当前函数的调用者,当调用者函数正在执行的时候,才调用
+
+        // function callerTest(){
+        //     if(callerTest.caller){
+        //         var caller = callerTest.caller.toString()
+        //         console.log(caller) //打印当前函数的调用者,handler这个函数
+        //     }else {
+        //         console.log('no caller')
+        //     }
+        // }
+        // function handler(){
+        //     callerTest()
+        // }
+        // function handlerToHandler(){
+        //     handler()
+        // }
+
+        // // callerTest();
+        // handler();
+        // handlerToHandler()
+
+        // // 方法重载
+
+        // // 方法重载指的是在一个类中,定义多个同名的函数,当函数参数的 个数 类型不同的时候,调用不同的方法
+        // function Test(){
+        //     var sum = 0;
+        //     for(let i = 0; i < arguments.length; i++){
+        //         sum += arguments[i];
+        //     }
+        //     console.log(sum)
+        // }
+        // test()
+        // test(1,2)
+        // test(1,2,3)
+
+    // ES6实现方法重载
+        // function Test(...args){
+        //     var sum = 0;
+        //     for(let i = 0; i < args.length; i++){
+        //         sum += args[i]
+        //     }
+        //     console.log(sum)
+        // }
+        // Test(1,2,3)
+
+        // 递归调用,实现阶乘
+
+        function factorial(n){
+            if(n == 1){
+                return 1;
+            }else{
+                return n * arguments.callee(n - 1)
+            }
+            
+        }
+        console.log(factorial(5)) //实现5的阶乘
+
+        function max(){
+            var maxNum = 0;
+            for(var i = 0; i < arguments.length; i++){
+                if(arguments[i] > maxNum){
+                    maxNum = arguments[i]
+                }
+            }
+            return maxNum
+        }
+        console.log(max(1,2,11,4))
+    </script>
+</body>
+</html>

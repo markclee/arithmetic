@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            什么是webpack
+                - webpack使用node编写的,node是基于CommonJs规范,require
+                    - import 是es6 的规范
+                    - export default {}
+                - 可以将CommonJs规范的资源,打包为浏览器支持的
+                - 自动打包所有的资源, .js .css .jpg .png
+                - tapable钩子
+                - webpack内部使用AST抽象语法
+                - 手写webpack
+                - 手写loader plugin
+            1:安装webpack
+                - 安装nodejs 高级版本
+                - 全局安装,可以在任何位置使用    ..... -g
+                - 项目中安装webpack(推荐使用) npm i webpack webpack-cli -D
+                    - webpack-cli 是webpack的命令包
+                    - 项目使用完毕后,就不需要使用了,所以可以在项目中安装
+            2:在项目中使用webpack
+                -npx 执行项目中 webpack
+                -在webpack 4以后,零配置,会默认在./src目录下找文件
+                    - 缺点 只能是index.js这个文件名
+                -run code  运行node代码
+            3:npx原理
+                -在node_modules下的bin目录  window是找到webpack.cmd 执行webpack.js
+            4:webpack 应用场景
+                - nodejs 不需要打包,分包运行
+                - webpack是浏览器端的打包工具,把js文件,全部打包成一个,给浏览器
+                - 引用外部文件,图片等资源
+            5:webpack的基本配置
+                - webpack 的配置文件遵循CommonJs规范
+                - entry
+                    - 在项目根目录下,webpack.config.js webpackfile.js
+                        module.exports = { entry : './src/main.js'}
+                - output 
+                - loader 对模块的源代码,进行转换
+                - plugins 插件 
+                 
+
+        
+        
+        
+        
+        */
+    
+    
+    
+    </script>
+</body>
+</html>

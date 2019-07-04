@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let pms = new Promise((resolve, reject)=>{
+        //     setTimeout(function(){
+        //         if(parseInt(Math.random()*10) > 5){
+        //             console.log('随机数大于5,算任务成功')
+        //             resolve('可以传参')
+        //         }else{
+        //             console.log('随机数小于5,算任务失败')
+        //             reject('还可以传参')
+        //         }
+        //     },200)
+        // })
+        // .then(value=>{
+        //     console.log('success', value)
+        // })
+        // .catch(err=>{
+        //     console.log('fail', err)
+        // })
+
+        // function Promise(executor){
+        //     let self = this
+        //     self.value = undefined
+        //     self.reason = undefined
+        //     self.status = 'pending'
+
+        //     self.onFulFilledCallbacks = []
+        //     self.onRejectedCallbacks = []
+
+        //     function resolve(){
+
+        //     }
+        // }
+
+
+        function Promise(executor) {
+            let self = this;
+            self.value = undefined
+            self.reason = undefined
+            self.status = 'pending'
+            // 用于保存调用then的时候,传入的两个回调函数
+            // 如果在调用then时候,已经resolve 或者 reject了, 那么就直接执行函数,不用保存了
+            // 所以executor里边,一定会调用resolve或者rejecte中的一个,因为函数执行(不是逻辑上的成功)
+            // (就是逻辑上失败)
+            self.onFulFilledCallbacks = []
+            self.onRejectedCallbacks = []
+
+            function resolve(value) {
+                if (self.status === 'pending') {
+                    self.value = value
+                    self.status = 'resolve'
+                    self.onFulFilledCallbacks.forEach(onFulFilled => {
+                        onFulFilled()
+                    })
+                }
+            }
+
+            function reject(reason) {
+                if (self.status === 'pending') {
+                    self.reason = reason
+                    self.status = 'rejected'
+                    // 调用执行失败后 里边onRejected方法
+                    self.onRejectedCallbacks.forEach(onRejected => {
+                        onRejected()
+                    })
+                }
+            }
+            try {
+                executor(resolve, reject)
+            } catch (error) {
+                reject(error)
+            }
+        }
+        Promise.prototype.then = function (onFulFilled, onRejected) {
+            if (this.status === 'pending') {
+                this.onFulFilledCallbacks.push(() => {
+                    onFulFilled(this.value)
+                });
+                this.onRejectedCallbacks.push(() => {
+                    onRejected(this.reason)
+                });
+            } else if (this.status === 'resolved') {
+                onFulFilled(this.value);
+            } else if (this.status === 'rejected') {
+                onRejected(this.reason)
+            }
+        }
+        /*
+            1:promise的三种状：等待pending,成功resolve,失败rejected.(说直接一点就是用来记录resolve或者reject是否已经调用，也就是常说的那个executor任务执行成功了还是失败了)
+            这一次我们新增了两个数组onFulFilledCallbacks、onRejectedCallbacks用来保存调用then的时候传的两个回调函数(当然如果在调用then的时候已经resolve或reject,那就直接执行传入的函数,不用保存了)
+            2:所以executor里一定会调用resolve或者reject中的一个，因为一个函数的执行不是(逻辑上成功)就是(逻辑上失败).对应我们写的例子就是随机数不是大于5就是小于5.
+            3:executor任务成功了肯定有成功后的结果，失败了我们肯定也拿到失败的原因。所以value与reason一个是用来保存成功的结果，一个是用来保存失败的原因。
+            4:ps：onFulFilledCallbacks、onRejectedCallbacks定为数组的原因是为了这个功能:
+        */
+    </script>
+</body>
+
+</html>
