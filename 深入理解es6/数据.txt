@@ -1,0 +1,58 @@
+var obj = {
+"code": 0,
+"msg": "成功",
+"data": [
+        {
+            "id": 1,
+            "createTime": "2018-10-12T02:12:01.000+0000",
+            "updateTime": "2019-04-16T07:04:42.000+0000",
+            "menuName": "系统管理",
+            "level": "1",
+            "parentId": null,
+            "contentHtml": "#",
+            "sort": 1,
+            "state": 1,
+            "createName": "admin",
+            "updateName": "王明秀"
+        },
+        {
+            "id": 2,
+            "createTime": "2018-10-12T02:09:08.000+0000",
+            "updateTime": "2019-01-03T02:49:06.000+0000",
+            "menuName": "菜单管理",
+            "level": "2",
+            "parentId": "1",
+            "contentHtml": "menu.html",
+            "sort": 1,
+            "state": 1,
+            "createName": "admin",
+            "updateName": null
+        },
+        {
+            "id": 4,
+            "createTime": "2018-12-11T06:46:27.000+0000",
+            "updateTime": "2019-04-02T08:49:14.000+0000",
+            "menuName": "报表管理",
+            "level": "1",
+            "parentId": null,
+            "contentHtml": "#",
+            "sort": 2,
+            "state": 1,
+            "createName": "admin",
+            "updateName": "王明秀"
+        },
+        {
+            "id": 5,
+            "createTime": "2018-12-11T06:47:00.000+0000",
+            "updateTime": "2018-12-24T08:40:31.000+0000",
+            "menuName": "数据库管理",
+            "level": "2",
+            "parentId": "1",
+            "contentHtml": "dbTable.html",
+            "sort": 3,
+            "state": 1,
+            "createName": "admin",
+            "updateName": null
+        }
+]
+}

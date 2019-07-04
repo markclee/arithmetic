@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="list"></ul>
+    <script>
+        /*
+            -将3000个li渲染到页面中,页面会发生卡顿,卡顿是fps低,因为3000个li不会被用户同时全部看到,大部分可能看不到
+            那看不到的部分,没有渲染的必要
+            - 我们生成一个文档碎片,将创建好的li,先插入到内存中的文档碎片里,每次渲染4个li
+            batch 一批
+        
+        
+        
+        */ 
+    
+    (()=>{
+        const container = document.getElementById('list')
+        if(!container){
+            return
+        }
+
+        const total = 300
+        const batchSize = 4 //没批次插入的节点次数,越大越卡
+        const batchCount = total / batchSize //需要批量处理多少次
+        let batchDone = 0 //已经完成的 批处理个数
+
+        function appendItems(){
+            const fragment = document.createDocumentFragment();
+            for(let i = 0; i < batchSize; i++){
+                const Item = document.createElement('li')
+                Item.innerText = (batchDone * batchSize) + i + 1
+                fragment.appendChild(Item)
+            }//end for
+            container.appendChild(fragment)
+            batchDone++
+            doBatchAppend()
+        }
+
+        function doBatchAppend(){
+            if(batchDone < batchCount){
+                //参数:回调函数
+                //告诉浏览器,在下次重绘之前,调用指定回调函数,更新下一帧动画
+                window.requestAnimationFrame(appendItems)
+            }
+        }
+
+        // 函数调用,执行3000个li 插入页面
+        doBatchAppend()
+
+        //
+        container.addEventListener('click', function(e){
+            const target = e.target
+            if(target.tagName === 'LI'){
+                alert(target.innerText)
+            }
+        })
+
+    })()
+    </script>
+</body>
+</html>

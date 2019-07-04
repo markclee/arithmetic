@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function add(x, y, callback){
+        // setTimeout(function(){
+        //     const z = x + y;
+        //     // 此处是调用
+        //     callback(z);
+        // }, 1000)
+        // }
+        // const res = add(1, 2, function(res){
+        //     console.log('x+y的值是'+ res);
+        // })        
+
+    function add(x, y, callback){
+
+        setTimeout(function(){
+            const z = x + y;
+            callback && callback(z);
+            // 在执行完callback的定义阶段之后,在执行28行代码
+        }, 2000)//最后一行执行的代码
+    }
+    add(1, 2, function(z){
+        console.log(z);
+    })
+
+        // var str = '?type=0&id=3';
+        // var obj = {};
+        // var search = str.replace(/^\?/, '');
+        // var arr= search.split('&');
+        // arr.forEach(function(item,i){
+        // var itemArr = item.split('=');
+        //  obj[itemArr[0]] = itemArr[1];
+        // })
+        // // console.log(itemArr[type]);
+        // console.log(obj.type, obj.id)
+    </script>
+</body>
+</html>

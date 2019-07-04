@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*插入排序思路
+        我们将数组分为两个数组,已排序数组空间,未排序数组空间,
+        初始化已排序数组空间,只有一个元素,即数组中的第一个元素
+        核心思想:
+            - 取未排序空间中的元素,在已排序空间中找到合适的位置,将其插入,保证已排序空间一直有序
+            - 找到插入点,将插入点之后的元素顺序往后移动一位,腾出插入位置
+            - 重复整个过程,直到未排序区间中元素为空
+            - 元素的比较 元素的移动
+            - 逆序度 等于 数据移动个数的总和
+        
+            插入排序不需要额外的存储空间,所以是原地算法
+            稳定算法
+            O(n2)
+        
+        
+        
+        */
+       
+        function insert(arr) {
+            //选择第一位的元素
+            for (let j = 1; j < arr.length; j++) {
+                //key 永远是 待插入的元素
+                let key = arr[j]
+                //从以排序好的数组中,选择最大的元素进行比较
+                // i 已排序数组中, 最大元素的下标
+                let i = j - 1
+                while (i >= 0 && arr[i] > key) {
+                    arr[i + 1] = arr[i]
+                    //因为arr[i]等于了 arr[i+1],数组中,已排元素中最大值arr[i],等于待插入arr[i+1]
+                    //条件判断中的,arr[i] 永远大约 key,所以要减去1
+                    i = i - 1
+                }
+                //最后i的下标比插入的位置小1, 因为i--,将这个待插入元素插入指定位置
+                arr[i + 1] = key
+                console.log(arr)
+                
+            }
+            return arr
+        }
+        var test = [11,4,1,10,9]
+        console.log(insert(test))
+
+    </script>
+</body>
+
+</html>

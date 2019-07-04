@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //1搭建函数框架
+        const PENDING = 'pending'
+        const RESOLVED = 'resolved'
+        const REJECTED = 'rejected'
+
+        function myPromise(fn){
+            const that = this // 异步执行,保存this
+            that.status = PENDING //Promise的开始状态
+            that.value = null //保存 resolve reject then中的值
+            that.resolvedCallbacks = [] //resolveCallbacks 保存then中回调,因为执行完Promise时候 状态可能还在等待中,此时把then中的回调保存起来用于状态改变使用
+            that.rejectedCallbacks = []
+
+            //resovle方法
+            // 两个方法必须是等待中,规定:只有等待状态才可以改变状态
+            // 将当前状态改为对应状态,将传入的值,赋值给value
+            // 遍历回调函数 执行
+            function resolve(value){
+                if(that.state === PENDING){
+                    that.state = RESOLVED
+                    that.value = value
+                    that.resolvedCallbacks.map(cb=>cb(that.value))
+                }
+            }
+            // reject方法
+            function reject(err){
+                if(that.state === PENDING){
+                    that.state = REJECTED
+                    that.value = value
+                    that.rejectedCallbacks.map(cb=>cb(that.value))
+                } 
+            }
+
+            // 执行promise 传入的函数
+            // 执行传入的参数,将之前的两个函数当做参数传入
+            try{
+                fn(resolve, reject)
+            } catch (e){
+                // 如果执行遇到错误,捕获错误,执行reject函数
+                reject(e)
+            }
+        }
+        // 首先判断两个参数是否为函数类型,因为是可选参数
+        // 当参数不是函数类型,需要创建一个函数,赋值给对应的参数,同时实现透传
+        MyPromise.prototype.then = function(onFulfilled, onRejected){
+            const that = this
+            onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v => v
+            onRejected = typeof onRejected === 'function'
+                ? onRejected
+                : r=>{
+                    throw r
+                }
+            if(that.state === PENDING){
+                that.resolvedCallbacks.push(onFulfilled)
+                that.rejectedCallbacks.push(onRejected)
+            }
+            if(that.state === RESOLVED){
+                onFulfilled(that.value)
+            }
+            if(that.state === REJECTED){
+                onRejected(that.value)
+            }
+        }
+        // 调用Promise
+        new MyPromise((resolve, reject)=>{
+            setTimeout(()=>{
+                resolve(1)
+            }, 0)
+        }).then(value=>{
+            console.log(value)
+        })
+    </script>
+</body>
+</html>

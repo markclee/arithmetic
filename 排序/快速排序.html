@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		function quickSort (arr, left, right) {
+			if (left > right) return;
+			// 数组中最左边的为基准数
+			var baseNum = arr[left];
+			// 定义变量i，指向最左边
+			var i = left;
+			// 定义变量j，指向最右边
+			var j = right;
+			// 当i与j不相遇时候，在循环中检索
+			while(i !== j) {
+				// j从右向左检索比基准数小的，如果检索到比基准数小的数，就停下
+				// 如果检索到比基准数大的就继续向左检索
+				while(arr[j] >= baseNum && i < j) {
+					j--;
+				}
+				// i从左向右检索，如果检索到比基准数大的数，就停下
+				// 如果检索到比基准数小的,就继续检索
+				while(arr[i] <= baseNum && i < j) {
+					i++;
+				}
+				// 代码走到这里，i停下来，j也停下来，交换i与j位置数组中的值
+				var temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+			// r如果上边的while循环不成立，会跳出循环，向下执行
+			// 如果这个条件不成立，说明i与j相遇了
+			// i与j相遇，交换基准数与这个相遇位置的元素
+			// 把相遇位置的元素，赋值给基准数这个位置的元素
+			arr[left] = arr[i];
+			// 把基准数赋值给相遇位置的元素
+			arr[i] = baseNum;
+
+			// 基准数在这里就归位了，左边的数都比他小，右边的数都比他大
+			quickSort(arr, left, i - 1);
+			// 排基准数右边
+			quickSort(arr, j + 1, right);
+		}
+
+		var arr = [3,9,5,8,1,2];
+		quickSort(arr, 0, arr.length - 1);
+		console.log(arr);
+	</script>
+</body>
+</html>

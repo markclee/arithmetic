@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*js typeof的数据类型
+            Number String Function Boolean Object Undefined Symbol
+            js在底层存储变量时候,在变量的机器码 1-3位存储类型信息
+                - 000 对象
+                - 010 浮点数
+                - 100：字符串
+                - 110：布尔
+                - 1：整数
+            null 机器码为0
+            undefined -2^30整数来表示
+
+            typeof null //object
+            null instanceof null //报错 
+        
+            1最准确的判断方式
+                Object.prototype.toString()
+            例如:
+                Object.prototype.toString.call(1) // "[object Number]"
+                Object.prototype.toString.call('hi') // "[object String]"
+                Object.prototype.toString.call({a:'hi'}) // "[object Object]"
+                Object.prototype.toString.call([1,'a']) // "[object Array]"
+                Object.prototype.toString.call(true) // "[object Boolean]"
+                Object.prototype.toString.call(() => {}) // "[object Function]"
+                Object.prototype.toString.call(null) // "[object Null]"
+                Object.prototype.toString.call(undefined) // "[object Undefined]"
+                Object.prototype.toString.call(Symbol(1)) // "[object Symbol]"
+            instanceof的实现原理
+                - 右边变量的prototype在左边变量的原型链上即可
+        */ 
+        function Person(){
+            name : 'xiaosan'
+        }
+        function Student(){
+            study : 'english'
+        }
+        Student.prototype = new Person
+        let xs = new Student()
+        function new_instance_of(leftValue, rightValue){
+            let rightProtoType = rightValue.prototype //右边变量的prototype值
+            let leftProto = leftValue.__proto__ //左边表达式的__proto__值
+            while(true){
+                if(leftProto === null){
+                    return false
+                }
+                if(leftProto === rightProtoType){
+                    return true
+                }
+                leftProto =  leftValue.__proto__
+            }
+        }
+        console.log(new_instance_of(xs, Person))
+    
+    
+    </script>
+</body>
+</html>

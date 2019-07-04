@@ -1,0 +1,48 @@
+   事件监听
+    box.onclick = function () { console.log(1) }
+    box.onclick = function () { console.log(2) }
+
+	1. 你想买书
+    2. 到达图书馆,告诉你没有了这本书了
+    3. 你一直在等待(每个五分钟过去一趟,每隔五分钟打电话)
+    4. 你一直监视着图书馆,什么时候他有这个书了,你就买回来
+//--------------------------------------------------------------------//
+    发布订阅
+    box.addEventListener('click', function () { console.log(3) })
+    box.addEventListener('click', function () { console.log(4) })
+
+    1. 你想买书
+    2. 到达图书馆,告诉你没有了这本书
+    3. 你留了一个电话在那
+    4. 书来了他打给你,会给你打电话的这个人就是(订阅者,观察者)
+    5. 你给这个订阅者,观察者发布了一个任务(书来了告诉我)
+    6. 当你接到电话的时候,说明条件满足了(书到了)
+    7. 你就去执行买书这个事情
+	
+    8. 我买书的时候,顺带着还可以买个书签,买个书架子
+	
+
+// function *fn() {
+
+//     // 现在执行到这里
+//     yield console.log(a)
+//     yield console.log(a)
+// }
+
+// var a = 10
+
+// var obj = fn()
+
+// a = 20
+
+// obj.next()
+
+
+// a = 30
+// obj.next()
+
+
+// async function fn() {
+//     const res = await axios.get()
+//     console.log(res)
+// }

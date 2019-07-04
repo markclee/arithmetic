@@ -1,0 +1,70 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+          /*  
+            await 接收一个promise,在promise  resolved时候, 将值赋值给赋值表达式左边的变量
+            async 返回一个promise,可以使用then调用
+            await 后边跟着一个Promise,如果执行同步代码, 相当于=> const number = await Promise.resolve(800)
+            await 可以结合任何 类似 Promise的库使用
+            在顶级作用域中 使用async是非法的,必须用立即执行函数包裹
+            串行改并行
+             - 触发所有的请求,放在数组中,然后遍历数组
+            Promise.all接收一个数组,数组中的每个元素是一个Promise
+            Promise.all本身也返回一个Promise
+        */
+        /*
+            async 配合 for for of  while 循环可以使用
+            async 配合 forEach map filter reduce等需要回调函数的循环
+        */ 
+
+        const fruitBasket = {
+            apple: 27,
+            grape: 0,
+            pear: 14
+        }
+        // 假设从服务器上获取,fruitBasket
+        const sleep = ms => {
+            return new Promise(resolve => setTimeout(resolve, ms))
+        }
+        const getNumFruit = fruit => {
+            return sleep(1000).then(v => fruitBasket[fruit]);
+        }
+        //then是resolved函数声明
+        // getNumFruit('apple').then(num=>console.log(num))
+        // 使用await获取 水果数量
+
+        // const control = async _=>{
+        //     console.log()
+        //     console.log('start')
+        //     const numApple = await getNumFruit('apple')
+        //     console.log(numApple)
+        //     const numGrape = await getNumFruit('grape')
+        //     console.log(numGrape)
+        //     const numPear = await getNumFruit('pear')
+        //     console.log(numPear)
+        //     console.log('end')
+        // }
+        // control()
+        //for循环中使用await
+        const fruitsToGet  = ['apple', 'grape', 'pear']
+        const forLoop = async _=>{
+            console.log('start')
+            for(let index = 0; index < fruitsToGet.length; index++){
+                const fruit = fruitsToGet[index]
+                const numFruit = await getNumFruit(fruit)
+                console.log(numFruit)
+            }
+            console.log('end')
+        }
+        forLoop()
+        </script>
+    </body>
+    </html>

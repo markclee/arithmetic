@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+            array.reduce(function(previousValue , currentValue, currentIndex, arr), initialVal)
+            若传入初始值,previousValue首次迭代的就是初始值,否则是数组中的第一个元素
+            后续迭代 将是上一次迭代 函数返回的结果
+            如果数组长度为N 传入初始值,迭代次数为n,否则为n-1
+
+            - 累加器的值,可以是简单类型(数字,字符串)
+            - 累加器的值, 结构化类型(数组,对象)
+                + 将数组转换为对象
+                + 展开更大的数组
+                + 再一次遍历中进行两次计算
+                + 将映射和过滤函数组合
+                + 按顺序运行异步函数
+        */
+        //只要目标是将数组聚合为唯一的元素时
+
+        var nArr = [1, 2, 3, 4]
+        console.log(nArr.reduce((preV, curV) => {
+            return preV + curV
+        }, 2))
+        var arr = [{
+            id: 1,
+            type: 'A',
+            total: 3
+        }, {
+            id: 2,
+            type: 'B',
+            total: 5
+        }, {
+            id: 3,
+            type: 'E',
+            total: 7
+        }, ]
+       
+        //-----------------------统计 total 的总和---------------------
+
+        // function sum(arr){
+        //     let sum = 0
+        //     for(let i = 0; i < arr.length; i++){
+        //         const { total } = arr[i]
+        //         sum += total
+        //     }
+        //     return sum
+        // }
+        console.log(arr.reduce((sum, {
+            total
+        }) => {
+            return sum + total
+        }, 0))
+        //-------------------------聚合为字符串-------------------------
+        console.log(arr.reduce((str, {
+            id,
+            type
+        }) => {
+            return str += `id:${id},type:${type}`
+        }, ''))
+
+        //------------------聚合为对象---------------------------------
+        // function changeToObj(arr) {
+        //     const res = {};
+        //     arr.forEach(({
+        //         id,
+        //         type,
+        //         total
+        //     }) => {
+        //         res[id] = {
+        //             type,
+        //             total
+        //         };
+        //     })
+        //     return res;
+        // }
+        // console.log(changeToObj(arr))
+
+       arr.reduce((res, {
+            id,
+            type,
+            total
+        }) => {
+            res[id] = {
+                type,
+                total
+            }
+            return res
+        }, {})
+
+
+        /*------------------------将数组转化为对象--------------------------------
+        https://juejin.im/post/5cfcaa7ae51d45109b01b161
+        */
+        const userList = [{
+                id: 1,
+                username: 'john',
+                sex: 1,
+                email: 'john@163.com'
+            },
+            {
+                id: 2,
+                username: 'jerry',
+                sex: 1,
+                email: 'jerry@163.com'
+            },
+            {
+                id: 3,
+                username: 'nancy',
+                sex: 0,
+                email: ''
+            }
+        ];
+        function keyByUsernameReducer(acc, person){
+            return {...acc, [person.id]: person}
+        }
+        const userObj = userList.reduce(keyByUsernameReducer,{})
+        console.log(userObj)
+        // 扁平化数组?????
+        Array.prototype.flatMap = function(f){
+            const reducer = (preV, curV)=>preV.concat(f(curV))
+            return this.reduce(reducer, [])
+        }
+        const arrFlat = ["今天天气不错", "", "早上好"]
+        const arr2 = arrFlat.flatMap(s => s.split(''))
+        console.log(arr2)
+        // 扁平化数组
+        var arr = ['mu','zi',['dig',['big','love']]]
+        function platArr(arr){
+            var res = []
+            for(let i = 0; i < arr.length; i++){
+                if(Array.isArray(arr[i])){
+                    res = res.concat(platArr(arr[i]))
+                }else{
+                    res.push(arr[i])
+                }
+            }
+            return res
+        }
+        console.log(platArr(arr))
+        //https://www.jb51.net/article/154925.htm
+        // push concat区别
+        // push在原数组上修改,执行后原数组值改变,在原数组最后添加值
+        // concat先把原数组的每个值复制到另外一个新数组,然后在新数组上执行操作,不会改变原数组的值
+        // 如果参数不是数组,不管参数个数有多少个,push 和 concat都会直接把参数添加到数组最后
+        // 如果参数是数组,push就会直接把数组添加到原数组后, concat会把数组中的值取出来添加到原数组后 
+        /*--------------------------纯数字数组,toString split(',')------------------------------------*/
+        function flatArr1(arr){
+            return arr.toString().split(',').map(function(item){
+                return Number(item)
+            })
+        }
+        console.log(flatArr1([1,2,3,[4,'5',[6,7]],8]))
+        /*------------------------------使用reduce和concat方法, 二维数组--------------------------------*/ 
+        var twoArr = [['mu','zi'],['dig','big'],['lucky','jiji']];
+        const oneArr = twoArr.reduce((preV, curV)=>{
+            return preV.concat(curV)
+        })
+        console.log(oneArr)
+        /*--------------------------------------任何形式 的 数组-----------------------------------------------------*/
+        Array.prototype.flatArr = function(){
+            return this.reduce((preV, curV)=>{
+                // some 其实就是要不要得到一个布尔值????
+                //  Array.isArray 是一个 function
+                var moreArr = [].concat(curV).some(Array.isArray)//判断cur是不是数组
+                return preV.concat(moreArr ? curV.flatArr() : curV)
+
+            },[])
+        }
+        console.log(twoArr.flatArr())
+        /*---------------------------扩展运算符------------------------------------------------------------*/
+        function flatArr8(arr){
+            while(arr.some(item=>Array.isArray(item))){
+                arr = [].concat(...arr)
+            }
+            return arr
+        }
+        var arr8 = [1, 2, 3, [4, ['a', 5, [6]], 7]];
+        console.log(flatArr8(arr8))
+
+
+
+        /*******************处理数据*******************/
+        var obj = {
+            "code": 0,
+            "msg": "成功",
+            "data" : [{
+                        "id": 1,
+                        "createTime": "2018-10-12T02:12:01.000+0000",
+                        "updateTime": "2019-04-16T07:04:42.000+0000",
+                        "menuName": "系统管理",
+                        "level": "1",
+                        "parentId": null,
+                        "contentHtml": "#",
+                        "sort": 1,
+                        "state": 1,
+                        "createName": "admin",
+                        "updateName": "王明秀"
+                    },
+                    {
+                        "id": 2,
+                        "createTime": "2018-10-12T02:09:08.000+0000",
+                        "updateTime": "2019-01-03T02:49:06.000+0000",
+                        "menuName": "菜单管理",
+                        "level": "2",
+                        "parentId": "1",
+                        "contentHtml": "menu.html",
+                        "sort": 1,
+                        "state": 1,
+                        "createName": "admin",
+                        "updateName": null
+                    }]
+        }
+        
+        var tmpArr = obj.data
+        var newArr = []
+        tmpArr.forEach((item, index)=>{
+            newArr.push(item.contentHtml)
+        })
+        console.log(newArr)
+    </script>
+</body>
+
+</html>

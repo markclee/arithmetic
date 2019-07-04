@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    /*
+        全局变量
+            -在函数外,用var声明的变量
+            -可以在程序的任何地方访问
+        局部变量
+            -函数定义的形参
+            -函数体内,用var关键字声明的变量
+    */
+    /*
+        +匿名函数自调用
+            (function(){})()
+            等价于
+            var fn = function(){}
+            fn()
+        +函数的创建方式
+            -函数声明
+                - function abc(){//函数体}
+            -函数表达式
+                - var abc = function(){//函数体}
+                - 函数声明,函数预解析提升时,将整个函数体提升.
+                - 函数表达式,函数预解析提升时,将变量声明提升,函数体不提升
+            -箭头函数
+                - const foo = ()=>{//code}
+            -在class中定义的函数
+                - class C{
+                    foo (){
+                        //code
+                    }
+                }
+            -生成器函数 function * 
+                - function * foo(){//code}
+                - 生成器函数可以暂停,遇到yeild表达式立即暂停,后续可以恢复执行状态
+                - 调用生成器
+                    - 不是立即执行,返回一个已经暂停的生成器对象(如下代码中的iter)
+                    - iter视为一次函数调用,只不过是立即冻结了,在生成器函数的最顶端,第一行代码之前冻结
+                - 调用生成器函数时候
+                    - var iter = quips('xiaosan')
+                      [Object Generator]
+                    - iter.next() //函数调用将自身解冻,运行到下一次yeild,再次暂停
+                      [value:'你好, xiaosan',done:false]
+                    - iter.next()
+                      [value:'我们下次再见', done:false]
+                    - iter.next() //调用最后一次next,抵达生成器的末尾,返回done值是true,到达末尾意味着没有返回值,vaule为undefined
+                      [value:undefined, done:true]
+                - 生成器是迭代器
+                    - 所有的生成器内建 .next()和[Symbol.iterator]() 方法实现,你只需要编写循环行为即可
+            -类,用class定义的类,实际上也是函数
+                - class Foo{
+                    constructor(){
+                        //code
+                    }
+                }
+            - 异步函数
+                - async function foo(){
+                    //code
+                }
+                - const foo = async()=>{
+                    //code
+                }
+                - async function *foo(){
+                    //code
+                }
+        +this问题
+                +普通函数this
+                    - 调用函数时所使用的引用 决定函数执行时刻的this值
+                    - 奥秘:我们获取函数的表达式,它实际上返回的并不是函数本身,而是一个Reference类型
+                +Reference类型
+                    - Reference类型由两部分组成
+                        - 对象
+                        - 属性值
+                +Reference类型中的对象,是this的值            
+    
+    */
+  
+
+    
+    
+    
+    
+    </script>
+</body>
+</html>

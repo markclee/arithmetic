@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+    /*
+    https://www.zhoulujun.cn/html/webfront/browser/webkit/2016_0506_7820.html
+    回流必引起重绘,重绘不一定引起回流
+    页面显示的几个阶段
+        -生成dom树(包括dispaly:none的元素)
+        -  在dom树的基础上,根据节点的集合属性(margin padding width height)生成,render tree(不包括display:none head节点),包含
+            visibility:hidded节点
+        - 在rendertree的基础上,继续渲染颜色背景等样式
+    什么是render tree:
+        -浏览器使用的是流式布局模型(Flow Based Layout),浏览器会把html解析成DOM,把css解析成CSSOM,DOM和CSSOM
+         合并,生成render Tree
+        -通过render Tree知道节点的样式,计算他们在页面上的位置,最后把节点绘制在页面上
+        -由于浏览器使用流式布局模型,对RenderTree的计算通常只需要一次就可以完成,但是table及其内元素
+         除外,需要多次计算,通常花费3倍同等元素的时间,所以要避免使用table布局
+
+    回流:
+        -当rende tree中的一部分(全部)因为元素的规模尺寸,布局,隐藏等改变而需要重新构建
+        -每个页面至少需要一次回流,就是在页面第一次加载的时候
+        -在回流过程中,浏览器会使渲染树中受到影响的部分失效,并重新构造这部分渲染树
+        -完成回流后,浏览器会重新绘制受影响的部分到屏幕中,该过程称为重绘
+        -不一定每次回流都是立即执行,而是积攒一批,也成异步reflow
+    重绘:
+        - 当rendertree中的一些元素需要更新属性,而这些属性只影响元素的外观,风格,不影响布局,
+            比如 background-color 则称为重绘
+    回流什么时候发生
+        1页面渲染初始化
+        2调整窗口大小(Resizing the window) 浏览器窗口尺寸改变-resize事件发生
+        3增加或者移除样式表(stylesheet)
+        4元素位置改变,元素尺寸改变
+        5内容改变-比如文本改变或图片大小改变 引起的计算值宽度和高度的改变
+        6改变字体
+        7激活css伪类 :hover
+        8操作class属性
+        9脚本操作 DOM ,添加或删除可见的DOM元素
+        10 计算offsetWidth offsetHeight属性
+        11 设置style属性的值
+    
+
+    优化重绘回流
+        css:
+            避免使用table布局
+            尽量可能在DOM树的最末端改变class
+            避免设置多层内联样式
+            将动画效果应用到position属性为absolute的元素上
+            避免使用css表达式
+        javascript
+            避免频繁操作样式,最好一次性重写style属性,或者将样式列表定义为class并一次性更改class属性
+            避免频繁操作DOM，创建一个documentFragment，在它上面应用所有DOM操作，最后再把它添加到文档中。
+            也可以先为元素设置display: none，操作结束后再把它显示出来。因为在display属性为none的元素上进行的DOM操作不会引发回流和重绘。
+            避免频繁读取会引发回流/重绘的属性，如果确实需要多次使用，就用一个变量缓存起来。
+            对具有复杂动画的元素使用绝对定位，使它脱离文档流，否则会引起父元素及后续元素频繁回流。基本原则就是，把动画元素用position:absolute踢出文档流，这样R&R就限制在了absolute元素的子节点。告诉浏览器，我这块结构跟其他的单独渲染，不要搅和全页面了。
+        display:none 隐藏不占位置,会引起回流+重绘
+        visibility:hidden 隐藏占位置,引起重绘
+    
+    */    
+   
+   /*
+    https://www.jianshu.com/p/1804ef41f9ba
+    https://www.jianshu.com/p/1804ef41f9ba
+    
+    visibility hidden, display none, v-if, v-show的总结
+        render tree = DOM Tree + CSSOM
+        visibility:hidden 隐藏占位置----重绘(CSSOM)
+        display:none 隐藏不占位置----回流+重绘(DOM Tree + CSSOM)
+
+        v-if 销毁dom树,达到让元素隐藏显示的效果,这里的开销大,因为要销毁整个dom树?????  
+        v-show 更改display的属性 达到效果----重绘+回流(DOM Tree + CSSOM)这里的开销相对小,因为是局部渲染DOM树
+    */
+   </script> 
+</body>
+</html>

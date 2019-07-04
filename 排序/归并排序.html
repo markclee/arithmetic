@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*  
+            致命缺点
+                - 不是原地算法
+            递归写法技巧
+                - 分析得出递归公式
+                - 找到终止条件
+                - 将递归公式,翻译成代码
+            归并排序的递归公式
+                - merge_sort(p....r) = merge_sort(p...q), merge_sort(q+1...r)
+                - 终止条件
+                    - p >= r
+            归并算法
+                - 稳定算法
+                - 排序的执行效率与排序的原始数组的逆序度无关,无论什么情况,时间复杂度都是0(nlogn)
+                - 空间复杂度0(n)
+            分制思想
+            merge 假定左右排好顺序后,归并用的
+            mergeSort 递归调用的函数,用于分割数组
+
+            实现逻辑:
+                如果要排序一个数组，我们先把数组从中间分成前后两部分
+                然后对前后两部分分别排序，再将排好序的两部分合并在一起，这样整个数组就都有序了。
+        
+        */ 
+
+        function mergeSort(arr){
+            // 设置终止条件
+            if(arr.length < 2){
+                return arr
+            }
+            // 设置中间值
+            var middle = parseInt(arr.length / 2)
+            // 左子列 1到middle个之间,不包括middle
+            var left = arr.slice(0, middle)
+            //右子列 middle到最后 
+            var right = arr.slice(middle)
+            if(left == 'undefined' && right == 'undefined'){
+                return false;
+            }
+            return merge(mergeSort(left), mergeSort(right));
+
+        }
+        //一个数组,分成两个数组,假定这两个数组已经排好顺序
+        function merge(left, right){
+            var result = []
+            while(left.length && right.length){
+                // 等号是 稳定排序
+                if(left[0] <= right[0]){
+                    //把left的左子树推出一个,然后push到result数组里
+                    result.push(left.shift())
+                }else{
+                    //把right的右子树推出一个,push进result数组里
+                    result.push(right.shift())
+                }
+            }
+            // 经过上边循环,左子列或右子列 一个不为空, 或者都为空
+            // 如果左边不为空,左边剩余的是有已经排好的数组,将数组push到result中
+            while(left.length){
+                result.push(left.shift())
+            }
+            while(right.length){
+                result.push(right.shift())
+            }
+            return result
+        }
+        var nums=[6,10,1,9,4,8,2,7,3,5]
+        console.log(mergeSort(nums))
+
+
+
+        // 查找数组中第k大的数
+        // 两个有序数组,合并为一个数组
+        function mergeArr(arr1, arr2){
+           var result = []
+           
+        }
+    </script>
+</body>
+</html>

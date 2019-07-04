@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='./run.js' charset="utf-8"></script>
+    <script src='./jquery-1.12.4.min.js' charset="utf-8"></script>
+</head>
+<body>
+    <script>
+        // runner调用一个generator函数,ajax是一个promise对象,当ajax读完了,把控制权还给generator
+        runner(function *(){
+            let data1 =yield $.ajax({
+                url:'./1.txt',
+                dataType: 'json'
+            });
+            let data2 =yield $.ajax({
+                url:'./2.txt',
+                dataType: 'json'
+            });
+            let data3 =yield $.ajax({
+                url:'./3.txt',
+                dataType: 'json'
+            });
+            console.log(data1, data2, data3)
+        })
+        /*
+            异步操作写法
+                - 回调
+                - Promise
+                    - 一次读一堆数据
+                    Promise.all({
+                        $.ajax({url:xxx, dataType: 'json'}),
+                        $.ajax({url:xxx, dataType: 'json'}),
+                        $.ajax({url:xxx, dataType: 'json'})
+                    }).then(result=>{
+                        完事
+                    }, err=>{
+                        alert('错了')
+                    })
+                - generator
+                    - 适合掺杂逻辑,比如读取用户数据,是不是vip,是vip读vip商品,不是vip读普通商品
+                    - 带逻辑的异步
+                    runner(function *(){
+                        let data1 = yield $.ajax({url:xxx, dataType:'json'});
+                        let data1 = yield $.ajax({url:xxx, dataType:'json'});
+                        let data1 = yield $.ajax({url:xxx, dataType:'json'});
+                    })
+        */ 
+       runner(function *(){
+           let userData = yield $.ajax({url:'getUserData', dataType:'json'})
+           if(userData.type = 'vip'){
+               let items = yield $.ajax({url:'getVipItems', dataType:'json'});
+           }else{
+               let items=yield $.ajax({url:'getItems',dataType:'json'});
+           }
+           //生成
+       })
+        
+        
+    </script>
+</body>
+</html>

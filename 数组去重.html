@@ -69,49 +69,94 @@
     console.log(arr.unique());
     console.log(Object.prototype.toString.call('123'));
     console.log(hash)
-	
-	
-	
-	
-	
-	 window.onload = function () {
-            var getQc = function(arr){
-            var newArr = [arr[0]];
-            for(var i = 1; i < arr.length; i++){
-                for(var j = 0; j < newArr.length; j++){
-                    var flag = true;
-                    if(arr[i] === newArr[j]){
-                        flag = false;
-                        break;
-                    }
-                }
-                if(flag){
-                    newArr[newArr.length] = arr[i];
-                }
-            }
-            return newArr;
-        }
+    //window.onload = function () {
+        //     var getQc = function(arr){
+        //     var newArr = [arr[0]];
+        //     for(var i = 1; i < arr.length; i++){
+        //         for(var j = 0; j < newArr.length; j++){
+        //             var flag = true;
+        //             if(arr[i] === newArr[j]){
+        //                 flag = false;
+        //                 break;
+        //             }
+        //         }
+        //         if(flag){
+        //             newArr[newArr.length] = arr[i];
+        //             newArr.push(arr[i]);
+        //         }
+        //     }
+        //     return newArr;
+        // }
         // var repeat = [1,2,2,0,6,8,8,0];
-        var repeat = new Array(1,2,2,0,6,8,8,0);
-        console.log(getQc(repeat));
+        //var repeat = new Array(1,2,2,0,6,8,8,0);
+        //console.log(getQc(repeat));
 
 
         // 统计数组元素出现的次数
-        var arr = [1,1,2,3,4,2,1];
-        var obj = {};
-        for (var i = 0; i < arr.length; i++) {
-            if(obj[arr[i]]) {
-                // 属性        值
-                // 设置属性 = 给属性赋值
-                // obj[arr[i]]++;
-                obj[arr[i]] = obj[arr[i]] + 1;
-            } else {
-                // 没有这个属性，设置属性 = 给属性赋值
-                obj[arr[i]] = 1;
+    //     var arr = [1,1,2,3,4,2,1];
+    //     var obj = {};
+    //     for (var i = 0; i < arr.length; i++) {
+    //         if(obj[arr[i]]) {
+    //             // 属性        值
+    //             // 设置属性 = 给属性赋值
+    //             // obj[arr[i]]++;
+    //             obj[arr[i]] = obj[arr[i]] + 1;
+    //         } else {
+    //             // 没有这个属性，设置属性 = 给属性赋值
+    //             obj[arr[i]] = 1;
+    //         }
+    //     }
+    //     console.log(obj);
+    //} //end window
+
+    //按照固定长度,拆分数组
+    // function splitIntoRows(icons, rowLength){
+    //     var rows = []
+    //     for(var i = 0; i < icons.length; i += rowLength){
+    //         rows.push(icons.slice(i, i + rowLength))
+    //     }
+    //     return rows
+    // }
+
+    //使用生成器创建代码
+    //使用生成器,返回一个迭代器,每次根据需求,逐一计算结果
+    // function* splitIntoRows(icons, rowLength){
+    //     for(var i = 0; i < icons.length; i += rowLength){
+    //         yield icons.slice(i, i + rowLength)
+    //     }
+    // }
+    //模拟filter方法
+    // function* filter(test, iterable){
+    //     for(var item of iterable){
+    //         if(test(item)){
+    //             yield item
+    //         }
+    //     }
+    // }
+
+    //不定参数
+    // 检测后续参数,在第一个参数中,是否存在
+    function containsAll(haystack){
+        console.log(haystack)
+        for(var i = 1; i < arguments.length; i++){
+            var needle = arguments[i]
+          
+            if(haystack.indexOf(needle) === -1){
+                return false
             }
         }
-        console.log(obj);
-    } //end window
+        return true
+    }
+    console.log(containsAll("banana", "a", "ana"))
+
+    function containsAll(haystack, ...needles){
+        for(var needle of needles){
+            if(haystack.indexOf(needle) === -1){
+                return falsed
+            }
+        }
+        return true
+    }
 </script>
 </body>
 </html>
