@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 如果宽度大于最大宽度,那么将最大宽度默认值,设置给宽度
+        width > maxWidth ? width = maxWidth : width
+        width > maxWidth && (width = maxWidth)
+
+        //浏览器后退 返回
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted || window.performance &&
+                window.performance.navigation.type == 2) {
+                location.reload();
+            }
+        }, false);
+        //event.persisted 从缓存中获取时为true.页面返回时,为false,但有时会失效
+        //这时候发现有一个window.performance对象，performance.navigation.type是一个无符号短整型
+        // TYPE_NAVIGATE (0)：
+        // 当前页面是通过点击链接，书签和表单提交，或者脚本操作，或者在url中直接输入地址，type值为0
+        // TYPE_RELOAD (1)
+        // 点击刷新页面按钮或者通过Location.reload()方法显示的页面，type值为1
+        // TYPE_BACK_FORWARD (2)
+        // 页面通过历史记录和前进后退访问时。type值为2
+        // TYPE_RESERVED (255)
+        // 任何其他方式，type值为255
+
+
+
+        // document.readyState返回当前文档的状态(....载入中)
+        // uninitialized - 还未开始载入
+        // loading - 载入中
+        // interactive - 已加载，文档与用户可以开始交互
+        // complete - 载入完成
+
+
+    </script>
+</body>
+
+</html>

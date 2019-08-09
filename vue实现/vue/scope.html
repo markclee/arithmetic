@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    /*
+        1.普通插槽：父->子，父组件传递数据/元素/组件给子组件，子组件定义<slot>占坑
+            <template slot="xxx"></template>
+            <template v-slot="xxx"></template>
+        2.作用域插槽：子->父，子组件<slot>绑定属性，传递(数据)给父组件，父组件通过slot-scope接收子组件传递属性
+            <template slot="xxx" slot-scope="props"> props 是子组件传递过来的参数</template>
+            <template v-slot:xxx="props"> prop 是子组件传递过来的参数</template>
+        3.使用v-slot新语法，代替旧语法
+        4.多插槽时使用具名插槽方式（<slot name="header">），用于将数据绑定在指定的插槽
+    */
+    <div id="app">
+        <!-- <todo-item item="学习vue指令"></todo-item>
+        <todo-item item="学习vue事件"></todo-item>
+        <todo-item item="学习vue插槽"></todo-item> -->
+        <todo-item 
+            v-for="item in list" 
+            :item="item" 
+            @delete="handleDelete"
+            >
+            <span slot="prefixIcon" slot-scope="props" :style="{color: props.checked ? 'red' : 'green'}">我是前缀ICON</span>
+            <!-- <span slot="suffixIcon">我是后缀ICON</span> -->
+        </todo-item>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        // 根据input checkbox的状态，改变图标的颜色
+        Vue.component('todo-item',{
+            props: ['item', 'checked'],
+            template: `<li><input type='checkbox' v-model='checked'>
+                      <slot name='prefixIcon' v-bind='{ checked }'></slot>
+                      <span>{{item}}</span>
+                      <slot name='suffixIcon'></slot>
+                      <button @click='handleClick'>刪除</button>
+                    </li>`,
+            methods: {
+                handleClick(){
+                    this.$emit('delete', this.item)
+                }
+            }
+            // data: {
+            //     checked: false
+            // }
+        })
+        var vm = new Vue({
+            el : '#app',
+            data : {
+                msg : 'hello vue',
+                list: ['学习vue指令','学习vue事件','学习vue插槽']
+            },
+            methods : {
+               handleDelete(item){
+                const index = this.list.findIndex(text=>text === item)
+                this.list.splice(index, 1)
+               }
+            }
+        })
+    </script>
+</body>
+</html>

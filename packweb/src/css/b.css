@@ -1,0 +1,6 @@
+/* li:last-child {
+    background-color:pink;
+} */
+li:last-of-type {
+    background-color:pink;
+}

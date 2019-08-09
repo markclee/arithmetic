@@ -1,0 +1,9 @@
+// babel配置文件,为此项目配置babel, 使用.babelrc
+// json 格式的
+{
+    "presets": ["@babel/env"],//预先调整
+    "plugins": [
+        "@babel/plugin-proposal-class-properties",
+        "@babel/plugin-transform-runtime"
+    ]
+}             
