@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            position: relative;
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            background: conic-gradient(#fff 0 30%, orange, yellow, green, teal, blue, purple);
+
+        }
+        div {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <script>    
+        window.onload = function(){
+            //利用 indexOf返回 找到第一个元素的索引
+            let arr = [1, 2, 2, 3, 4, 5, 5, 6, 7, 7,8,8,0,8,6,3,4,56,2];
+            let arr2 = arr.filter((item, index, self)=>{
+                return self.indexOf(item) === index
+            })
+            console.log(arr2)
+        }
+    </script>
+    <div class="box">
+        <div class="inner"></div>
+    </div>
+</body>
+</html>

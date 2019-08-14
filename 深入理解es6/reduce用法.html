@@ -172,10 +172,10 @@
                 //  Array.isArray 是一个 function
                 var moreArr = [].concat(curV).some(Array.isArray)//判断cur是不是数组
                 return preV.concat(moreArr ? curV.flatArr() : curV)
-
             },[])
         }
         console.log(twoArr.flatArr())
+
         /*---------------------------扩展运算符------------------------------------------------------------*/
         function flatArr8(arr){
             while(arr.some(item=>Array.isArray(item))){
@@ -186,8 +186,12 @@
         var arr8 = [1, 2, 3, [4, ['a', 5, [6]], 7]];
         console.log(flatArr8(arr8))
 
-
-
+        function flatArr(arr){
+            while(arr.some(item=>Array.isArray(item))){
+                arr = [].concat(...arr)
+            }
+            return arr
+        }
         /*******************处理数据*******************/
         var obj = {
             "code": 0,

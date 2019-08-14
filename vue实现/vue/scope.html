@@ -7,16 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    /*
-        1.普通插槽：父->子，父组件传递数据/元素/组件给子组件，子组件定义<slot>占坑
+        <!-- 1.普通插槽：父->子，父组件传递数据/元素/组件给子组件，子组件定义<slot>占坑
             <template slot="xxx"></template>
             <template v-slot="xxx"></template>
         2.作用域插槽：子->父，子组件<slot>绑定属性，传递(数据)给父组件，父组件通过slot-scope接收子组件传递属性
             <template slot="xxx" slot-scope="props"> props 是子组件传递过来的参数</template>
             <template v-slot:xxx="props"> prop 是子组件传递过来的参数</template>
         3.使用v-slot新语法，代替旧语法
-        4.多插槽时使用具名插槽方式（<slot name="header">），用于将数据绑定在指定的插槽
-    */
+        4.多插槽时使用具名插槽方式（<slot name="header">），用于将数据绑定在指定的插槽 
+            <template slot="header"></template>
+    
+    
+        -->
     <div id="app">
         <!-- <todo-item item="学习vue指令"></todo-item>
         <todo-item item="学习vue事件"></todo-item>
