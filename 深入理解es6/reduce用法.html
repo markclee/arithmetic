@@ -186,12 +186,6 @@
         var arr8 = [1, 2, 3, [4, ['a', 5, [6]], 7]];
         console.log(flatArr8(arr8))
 
-        function flatArr(arr){
-            while(arr.some(item=>Array.isArray(item))){
-                arr = [].concat(...arr)
-            }
-            return arr
-        }
         /*******************处理数据*******************/
         var obj = {
             "code": 0,
