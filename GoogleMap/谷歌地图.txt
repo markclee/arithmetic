@@ -1,0 +1,7 @@
+GoogleApiComponent组件
+  1: 加载Google API
+  2: 在组件内处理 Google API 的访问
+ScriptCache.js
+  1: 异步加载<script>标签
+GoogleApi.js
+  1: 是script标签, 编译程序, 构建一个Google Script标记链接, 允许我们使用js对象, 描述要加载的Google API片段

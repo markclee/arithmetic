@@ -1,0 +1,180 @@
+技能要求
+    react react-redux redux-saga ant-mobile react-intl react-router
+    海外业务部, 业务发展部, 本地生活业务组
+使用脚手架启动项目
+     npx create-react-app todolist
+     react fiber 指的是 react16以后的  
+
+redux是react状态管理的框架，flux数据架构
+
+react的四个API:
+    1. ReactDOM.render 方法让 React 组件渲染到某个具体的 DOM 节点。
+    2. 组件的 render 方法 
+    3. 组件的 setState 方法，用于改变组件状态，触发 render 
+    4. 如何通过 props 给 React 组件传递参数。
+react组件化:
+        1:属性+状态=组件
+            props + state = component
+            外部传入  内部传出事件
+        2:受控组件 非受控组件
+            组件由外部维护 传递value  onchange事件
+            组件由内部维护
+        3:每个组件只做一件事
+            如果组件复杂，拆分为小组件
+        4:数据状态管理DRY原则
+            能够计算得到的状态就不要单独存储
+            组件尽量无状态，所需要数据通过props获取 
+setState方法
+    setState是一个异步函数,不会立即执行
+    setState接收一个函数,这个函数接收两个参数,第一个参数表示上一个状态值,第二个参数表示当前的props
+        this.setState((prevState, props) => ({
+            //do something here
+        }));
+    setState提供第二个参数,第二个参数也是一个函数,此函数在setState异步执行完毕后,才执行
+jsx语法:
+    1:是一种语法糖
+        - 在javascript的代码中，直接写html标记
+react与jquery可以共存
+    react只能操作id为root下边的代码
+    jquery可以操作其它部分的代码
+组件(首字母大写)
+    父->子 通过属性方式传值
+    子->父 父组件向子组件传递一个方法,子组件调用这个方法,间接的传递数据
+react单向数据流
+    -父组件允许向子组件传值,但子组件不能更改父组件传递过来的值
+        - 当state中的值被 多个组件 复用, 如果子组件改变了值, 那么其它应用这个值得父组件,也会被改变
+react视图层框架
+    -处理数据,需要使用redux
+react函数式编程
+    -自动化测试的优势
+
+props对参数类型校验,默认值
+    propTypes 
+    defaultProps
+数据state props 与 render 关系
+    - 当数据发生变化时候, render函数就会被重新执行
+    - 当父组件的render函数被运行时, 它的子组件的 render 也将会被重新运行一次
+虚拟DOM
+    - 数据state 
+    - 模板jsx内容
+    - 数据+模板 = 生成真实的DOM 来显示
+    - state发生改变
+    - 数据+模板 = 生成真实的DOM 替换原始的DOM
+    缺陷: 第一次生成一个完整的DOM片段, 第二次又生成了一个完整的DOM片段, 第二次的完全替换第一次的, 耗性能
+    - 用新的DOM 与 原始DOM 进行比较, 找差异, 用新的DOM(内存中 documentFragment), 替换以前有差异的DOM
+    缺陷: 作比对的过程, 消耗性能
+    - state数据
+    - JSX 模板
+    - 数据 + 模板 结合 生成真实的DOM 来显示
+    - 生成虚拟DOM(虚拟DOM就是一个js对象, 用来描述真实的DOM)
+        ['div', {id:'abc'}, ['span', {}, 'helloworld']]
+    - state发生变化
+    - 数据+模板 生成一个新的虚拟DOM
+        ['div', {id:'abc'}, ['span', {}, 'byebye']]
+    - 比较原始虚拟DOM 与 新的虚拟DOM的区别, 找到区别是span内容
+    - 直接操作DOM, 改变span中的内容
+react中ref的使用
+    - ref与setState结合使用的时候,要把获取ref的方法,放到setState的第二个参数内
+生命周期函数
+    - 在某一个时刻,组件会自动调用的函数
+    - componentWillMount 在组件即将挂在到页面上的时刻自动执行
+    - render
+    - componentDidMount 在组件挂在到页面上之后 自动执行
+    - shouldComponentUpdate 组件在更新之前,会被自动执行, 需要返回一个bool值
+    - componentWillUpdate 组件被更新之前,会被自动执行,在shouldComponentUpdate返回true,之后执行,返回false不执行
+    - componentDidUpdate 组件被更新之后,会自动执行
+    - componentWillReceiveProps    
+        + 当一个组件从父组件 接受了 参数
+        + 如果这个组件第一次存在于父组件中,不会被执行
+        + 如果这个组件已经存在父组件中,才会执行
+    - componentWillUnmount 当这个组件 即将从页面中剔除的时候 执行
+    - constructor 是es6的
+生命周期函数使用场景
+    - render生命周期函数必须存在, component组件没有 默认render钩子函数 所以render钩子必须存在组件中
+react提升性能的点
+    - 在constructor中绑定 this
+    - setSate是异步执行的,可以减少操作虚拟DOM
+    - 虚拟DOM 同层比对 key
+    - 配合 shouldComponentUpdate 减少 render执行次数
+react发送axios
+react的css动画效果
+    - react transition group
+        - npm install react-transition-group --save
+        - import { CSSTransition } from 'react-transition-group' 动画组件
+        - 用CSSTransition包裹div
+            + in 通过state中的属性控制
+            + timeout控制时间
+            + classNames='fade' 控制以fade-开头的类名
+            + unmountOnExit 动画执行完成, DOM元素被移除
+            + 用js的钩子函数, 控制动画
+                - onEnter 当入场动画,执行完成之后
+            + 添加第一帧, 入场动画
+                - appear={true}
+                - 对应的className是 fade-appear-active
+        - 实现多个元素之间的动画效果
+            + <TransitionGroup> 配合    <CSSTransition> 使用
+            + 引入 TransitionGroup
+            + TransitionGroup 包裹整个jsx
+            + CSSTransition 包裹要循环的div, 此时不需要in属性
+            + 后续深入动画 待学习
+redux,react搭配的数据层框架
+    - Store 组件改变Store中的数据即可 Store向其它组件分发数据
+redux的使用
+    - 安装redux
+     + npm install redux --save
+     + 创建store 导出store
+     + 传入reducer, reducer是用于记录数据的
+    - store是相当于图书管理员
+    - reducer相当于是管理员的笔记本, state存放的是整个仓库中的数据
+     + reducer返回一个函数
+     + 参数1: state
+     + 参数2: action
+    - redux-devtools-extension 的使用
+     +https://www.jianshu.com/p/c7f7411cd088
+actionTypes的拆分
+    - reducer接收action, 根据不同的actionType改变数据
+使用actionCreator统一创建action
+    - 通过actionCreator统一创建,统一管理action
+    - 创建action之后, 通过store将action派发出去
+redux设计原则
+    - store必须是唯一的
+    - 只有store能改变自己的内容
+        - reducer不能更改store中的数据
+            - 在reducer中深拷贝一份数据, 然后操作数据, 返回数据
+        - store拿到reducer的数据, 自己更新store中的数据
+    - reducer是一个纯函数
+        - 给定固定的输入, 就一定有固定的输出, 而且不会有任何副作用
+        - setTimeout ajax new Date() 都不是纯函数
+        - reducer不能有任何副作用
+            - 对传入参数的修改
+    - reducer的核心API
+        - createStore
+        - store.dispatch
+        - store.getState
+        - store.subscribe
+react拆分,ui组件, 容器组件
+    - ui组件负责页面渲染
+    - 容器组件负责页面逻辑
+无状态组件
+    - 无状态组件 就是一个函数 例如一个组件中, 只有一个render函数, 就称为无状态组件
+    - 无状态组件的性能高. 因为无状态组件,是一个函数
+redux 中发请求获取数据
+    -redux thunk 是 redux的中间件
+        - 使用redux中间件
+            - 
+redux的中间件
+    - 中间件,指的是action与store之间
+    - redux thunk中间件
+        - dispatch 根据参数不同, 如果传递的事函数则先执行, 对象在派发给store
+        - 解决异步问题
+            - 把异步操作放在action中进行操作
+    - redux saga
+        - 解决react中异步问题
+        - 把异步的逻辑单独拆分出来, 处理异步
+    - 视图->派发Action->dispatch->
+    redux 中 action只能是一个对象
+    redux thunk 中 action可以是一个函数了
+redux-saga
+    - 做异步代码拆分的中间件
+    - 只有redux才有 action 和 store 概念
+    - 

@@ -1,15 +1,15 @@
-function Person(name){
+function Person(name) {
 	this.name = name || 'person'
-	this.eat = function() {
+	this.eat = function () {
 		console.log('eatting');
 	}
 }
-Person.prototype.sayHi = function() {
+Person.prototype.sayHi = function () {
 	console.log('hello world');
 }
 
 /*
- 
+
 	--函数名后边的括号有两个作用：
 		++函数调用
 		++传参

@@ -1,14 +1,14 @@
 // 专门负责解析模板内容
-class Compile{
+class Compile {
     // 参数1 模板
     // 参数2 vue实例
-    constructor (el, vm){
+    constructor(el, vm) {
         // el----new vue时候传入的选择器
         this.el = typeof el == 'string' ? document.querySelector(el) : el
         // vm-----new vue的实例
         this.vm = vm
         // 编译模板 视图容器
-        if(this.el){
+        if (this.el) {
             console.log(123)
             // 1:把el中所有的子节点,都放入到内存中,fragment(内存中)
             let fragment = this.node2fragment(this.el)
@@ -21,12 +21,12 @@ class Compile{
         }
     }
     // 核心方法
-    node2fragment(node){
+    node2fragment(node) {
         let fragment = document.createDocumentFragment();
         // 把el中所有的子节点,挨个添加到文档碎片中
         let childNodes = node.childNodes
         // 
-        this.toArray(childNodes).forEach(node=>{
+        this.toArray(childNodes).forEach(node => {
             // 把我们的所有子节点,都添加到fragment中
             fragment.appendChild(node)
         })
@@ -36,35 +36,35 @@ class Compile{
     /*
         在内容中编译文档碎片
     */
-    compile(fragment){
+    compile(fragment) {
         let childNodes = fragment.childNodes
-        this.toArray(childNodes).forEach(node=>{
+        this.toArray(childNodes).forEach(node => {
             // 编译子节点
 
             // 如果是元素, 需要解析指令
-            if(this.isElementNodes(node)){
+            if (this.isElementNodes(node)) {
                 this.compileElement(node)
             }
             // 如果是文本, 解析里边的差值表达式
-            if(this.isTextNodes(node)){
+            if (this.isTextNodes(node)) {
                 this.CompileText(node)
             }
             // 节点中嵌套节点,需要递归解析
-            if(node.childNodes && node.childNodes.length > 0){
+            if (node.childNodes && node.childNodes.length > 0) {
                 this.compile(node)
             }
         })
     }
     // 解析html标签的
     // 拿到标签里边的指令
-    compileElement(node){
+    compileElement(node) {
         // 1:获取到当前节点下 所有的属性
         let attributes = node.attributes
         this.toArray(attributes).forEach(attr => {
-             // 2:解析vue的指令,所有以v-开头的指令
-             let attrName = attr.name
-             
-            if(this.isDirective(attrName)){
+            // 2:解析vue的指令,所有以v-开头的指令
+            let attrName = attr.name
+
+            if (this.isDirective(attrName)) {
                 // 拿到指令的类型
                 let attrValue = attr.value
                 let type = attrName.slice(2)
@@ -87,45 +87,45 @@ class Compile{
                 //     node.addEventListener(eventType, this.vm.$methods[attrValue].bind(this.vm))
                 // }
                 // 解析v-on指令
-                if(this.isEventDirective(type)){
+                if (this.isEventDirective(type)) {
                     CompileUtil['eventHandler'](node, this.vm, type, expr)
-                }else {
+                } else {
                     CompileUtil[type] && CompileUtil[type](node, this.vm, expr)
                 }
             }
         })
-       
+
         console.log('解析标签')
     }
     // 解析文本节点
-    CompileText(node){
+    CompileText(node) {
         let txt = node.textContent
         // 任意字符,一个以上
         // 正则表达式分组,$1 拿到第一个分组里边的内容
         // $2拿到第二个分组中的内容
         let reg = /\{\{(.+)\}\}/
-        if(reg.test(txt)){
-            let expr  = RegExp,$1
+        if (reg.test(txt)) {
+            let expr = RegExp, $1
             node.textContent = txt.replace(reg, CompileUtil.getVMValue(this.vm, expr))
         }
     }
 
     // 工具方法
-    toArray(likeArray){
+    toArray(likeArray) {
         return [].slice.call(likeArray)
     }
-    isElementNodes(node){
+    isElementNodes(node) {
         // Node type 1元素节点 3文本节点
-       return node.nodeType === 1
+        return node.nodeType === 1
     }
-    isTextNodes(node){
+    isTextNodes(node) {
         return node.nodeType === 3
     }
-    isDirective(attrName){
+    isDirective(attrName) {
         return attrName.startWith('v-')
     }
     // 解析v-on指令
-    isEventDirective(type){
+    isEventDirective(type) {
         return type.split(':')[0] === 'on'
     }
 }
@@ -146,24 +146,24 @@ let CompileUtil = {
         node.innerHTML = vm.$data[expr]
     },
     // 处理v-model指令
-    model(node, vm, expr){
+    model(node, vm, expr) {
         node.value = vm.$data[expr]
     },
-    eventHander(node, vm, type, expr){
+    eventHander(node, vm, type, expr) {
         // 给当前元素注册事件即可
         let eventType = type.split(':')[1]
         // 
         let fn = vm.$methods && vm.$methods[expr]
-        if(eventType  && fn){
+        if (eventType && fn) {
             // 发布订阅模式
             node.addEventListener(eventType, fn.bind(vm))
         }
     },
     // 这个方法用于获取vm中的数据
-    getVMValue(vm, expr){
+    getVMValue(vm, expr) {
         // 获取到data中的数据
         let data = vm.$data
-        expr.split('.').forEach(key=>{
+        expr.split('.').forEach(key => {
             data = data[key]
         })
         return data

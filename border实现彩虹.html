@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,17 +15,20 @@
             background: conic-gradient(#fff 0 30%, orange, yellow, green, teal, blue, purple);
 
         }
+
         div {
             display: block;
         }
     </style>
 </head>
+
 <body>
-    <script>    
-        window.onload = function(){
+    <script>
+        window.onload = function () {
+            // 数组去重
             //利用 indexOf返回 找到第一个元素的索引
-            let arr = [1, 2, 2, 3, 4, 5, 5, 6, 7, 7,8,8,0,8,6,3,4,56,2];
-            let arr2 = arr.filter((item, index, self)=>{
+            let arr = [1, 2, 2, 3, 4, 5, 5, 6, 7, 7, 8, 8, 0, 8, 6, 3, 4, 56, 2];
+            let arr2 = arr.filter((item, index, self) => {
                 return self.indexOf(item) === index
             })
             console.log(arr2)
@@ -35,4 +38,5 @@
         <div class="inner"></div>
     </div>
 </body>
+
 </html>

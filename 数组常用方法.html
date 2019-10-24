@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <!-- 
         数组常用方法
@@ -29,68 +31,70 @@
     filter -- 做删除时候方便
         按照你给出的条件,把数组中的内容添加到一个新的数组里面
         返回新数组
+    includes() -- 检测一个数组中,是否包含一个指定的值, 包含返回true 不包含返回false
+        arr.includes(searchElement, fromIndex)
+        fromIndex如果为负数, 搜索全部数组
     -->
     <script>
-        const arr = [
-            {
-                id : 1,
-                c : '内容1',
-                sex : 1,
-                isTrue : true
+        const arr = [{
+                id: 1,
+                c: '内容1',
+                sex: 1,
+                isTrue: true
             },
             {
-                id : 2,
-                c : '内容2',
-                sex : 0,
-                isTrue : false
+                id: 2,
+                c: '内容2',
+                sex: 0,
+                isTrue: false
             },
             {
-                id : 3,
-                c : '内容3',
-                sex : 1,
-                isTrue : true
+                id: 3,
+                c: '内容3',
+                sex: 1,
+                isTrue: true
             }
         ]
 
-    // -----------------------------------------------------------------------
-    // 错误写法
-    // var b = arr.forEach((item, index, arr)=>{
-    //     console.log(item.id);
-    // })
-    // console.log(b) //b 是 undefined
-    
-    // ---------------------------------------------------------------------
-    var b = arr.map((item, index, arr) => {
-        item.id++;
-        // 必须写return
-        // 返回的是一个新数组
-        // 会在遍历过程中,把你的每一次return 添加到一个新的数组中 
-        return item;
-    })
-    console.log(arr) //原始数组被改变
-    console.log(b)  //返回的新数组
+        // -----------------------------------------------------------------------
+        // 错误写法
+        // var b = arr.forEach((item, index, arr)=>{
+        //     console.log(item.id);
+        // })
+        // console.log(b) //b 是 undefined
 
-    // -----------------------------map应用 处理res-----------------------------------
-    let r = arr.map(item=>{
-        return {
-            title : item.name,
-            sex : item.sex === 1 ? '男' : item.sex === 0 ? '女' : '保密',
-            age : item.age,
-            avatar : item.image
+        // ---------------------------------------------------------------------
+        var b = arr.map((item, index, arr) => {
+            item.id++;
+            // 必须写return
+            // 返回的是一个新数组
+            // 会在遍历过程中,把你的每一次return 添加到一个新的数组中 
+            return item;
+        })
+        console.log(arr) //原始数组被改变
+        console.log(b) //返回的新数组
+
+        // -----------------------------map应用 处理res-----------------------------------
+        let r = arr.map(item => {
+            return {
+                title: item.name,
+                sex: item.sex === 1 ? '男' : item.sex === 0 ? '女' : '保密',
+                age: item.age,
+                avatar: item.image
+            }
+        })
+        // -----------------------------map应用 处理res-----------------------------------
+        // 用第一个参数,乘以后续参数
+        // multiply 乘以
+        function multiply(multiplier, ...theArgs) {
+            return theArgs.map(function (element) {
+                return multiplier * element
+            });
         }
-    })
-    // -----------------------------map应用 处理res-----------------------------------
-    // 用第一个参数,乘以后续参数
-    // multiply 乘以
-    function multiply(multiplier, ...theArgs){
-        return theArgs.map(function(element){
-            return multiplier * element
-        });
-    }
-    var newArr = multiply(2,1,2,3)
-    console.log(newArr)
-    // ----------------------------剩余参数-----------------------------------------------
-    /*	arguments
+        var newArr = multiply(2, 1, 2, 3)
+        console.log(newArr)
+        // ----------------------------剩余参数-----------------------------------------------
+        /*	arguments
 		 1:只能在函数体内部使用
 		 2:伪数组形式
         剩余参数与arguments的区别
@@ -98,53 +102,90 @@
          2:arguments对象是伪数组,剩余参数是Array的实例,可以使用数组的所有方法
          3:arguments对象还有一些附加的属性,callee属性    
     */
-    // 在剩余参数上,可以使用任意的数组方法(arguments是不可以的)
-    function sortRestArgs(...theArgs){
-        var sortArgs = theArgs.sort(function(a, b){
-            return a - b;
-        })
-        return sortArgs
-    }
-    console.log(sortRestArgs(113,22,1))
-    // 因为arguments实参,是一个伪数组,所以需要先转换成真数组
-    // 使用arguments排序,实参
-    function sortArguments(){
-        var args = Array.prototype.slice.call(arguments)
-        var sortedArgs = args.sort(function(a, b){
-            return a - b
-        })
-        return sortedArgs
-    }
-    console.log(sortArguments(11,4,9,2))
-    // -----此处?????
-    var a = {0:'first', 1:'second',2:'third'}
-    function test(){
-        console.log(Array.prototype.slice.call(arguments, 0))
-        console.log(Array.prototype.slice.call(arguments, 1))
-    }
-    test(a)
-    // ---------------------------------------------------------------------------
-    // 如果有一项isTrue的值为true,那么flag为true
-    // const flag = arr.some(item=>{
-    //     // 判断条件
-    //     // return item.isTrue === false;
-    //     return !item.isTrue;
-    // })
-    const flag = arr.some(item=>!item.isTrue)
+        // 在剩余参数上,可以使用任意的数组方法(arguments是不可以的)
+        function sortRestArgs(...theArgs) {
+            var sortArgs = theArgs.sort(function (a, b) {
+                return a - b;
+            })
+            return sortArgs
+        }
+        console.log(sortRestArgs(113, 22, 1))
+        // 因为arguments实参,是一个伪数组,所以需要先转换成真数组
+        // 使用arguments排序,实参
+        function sortArguments() {
+            var args = Array.prototype.slice.call(arguments)
+            var sortedArgs = args.sort(function (a, b) {
+                return a - b
+            })
+            return sortedArgs
+        }
+        console.log(sortArguments(11, 4, 9, 2))
+        // -----此处?????
+        var a = {
+            0: 'first',
+            1: 'second',
+            2: 'third'
+        }
 
-    // ----------------------------------------------------------------------------
-    const flag1 = arr.every(item=>{
-        // 如果数组中的每一项都为true,那么为true
-        // 
-        return item.isTrue;
-    })
-    console.log(flag1)
-    // -----------------------------------------------------------------------
-    const c = arr.filter(item=>{
-        return item.c == '内容3'
-    })
-    console.log(c)
+        function test() {
+            console.log(Array.prototype.slice.call(arguments, 0))
+            console.log(Array.prototype.slice.call(arguments, 1))
+        }
+        test(a)
+        // ---------------------------------------------------------------------------
+        // 如果有一项isTrue的值为true,那么flag为true
+        // const flag = arr.some(item=>{
+        //     // 判断条件
+        //     // return item.isTrue === false;
+        //     return !item.isTrue;
+        // })
+        const flag = arr.some(item => !item.isTrue)
+        // ----------------------------------------------------------------------------
+        const flag1 = arr.every(item => {
+            // 如果数组中的每一项都为true,那么为true
+            // 
+            return item.isTrue;
+        })
+        console.log(flag1)
+        // -----------------------------------------------------------------------
+        const c = arr.filter(item => {
+            return item.c == '内容3'
+        })
+        console.log(c)
+
+        //----------------------去除含有str2字母元素------------------------------------
+        let arr1 = ['a', 'b', 'b', 'c', 'd', 'a']
+        let arr2 = ['a', 'c']
+
+        function unique(arr1, arr2) {
+            return arr1.filter((item, index, self) => {
+                return !arr2.includes(item)
+            })
+        }
+        console.log(unique(arr1, arr2))
+
+
+        //------------------------------------去除含有2的元素---------------------------
+        var arr10 = ['10', '12', '23', '44', '42']
+        var newArr = arr10.filter(item => item.indexOf('2') < 0)
+        console.log(newArr)
+
+        //-------
+        function hasSubArray(master, sub) {
+            return sub.every((i => v => i = master.indexOf(v, i) + 1)(0));
+            // return sub.every((i =>
+            //     v => (
+            //         (i = master.indexOf(v, i) + 1)(0)
+            //     )
+            // ))
+        }
+
+        var array10 = [12, 44, 22, 66, 222, 777, 22, 22, 22, 6, 77, 3];
+
+        // console.log(hasSubArray(array10, [777, 22, 77]));
+        // console.log(hasSubArray(array, [777, 22, 3]));
+        // console.log(hasSubArray(array, [42]));
     </script>
 </body>
-</html>
 
+</html>

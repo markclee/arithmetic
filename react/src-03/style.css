@@ -1,0 +1,62 @@
+/* .show {
+    opacity: 0;
+    animation: show-item 1s ease-in forwards;
+}
+.hide {
+    opacity: 1;
+    transition: all 1s ease-in;
+    animation: hide-item 1s ease-in forwards;
+}
+@keyframes show-item {
+    0% {
+        opacity: 0;
+        color: green;
+    }
+    50% {
+        opacity: 0.5;
+        color: blue;
+    }
+    100% {
+        opacity: 1;
+        color: red;
+    }
+}
+@keyframes hide-item {
+    0% {
+        opacity: 1;
+        color: red;
+    }
+    50% {
+        opacity: 0.5;
+        color: blue;
+    }
+    100% {
+        opacity: 0;
+        color: green;
+    }
+} */
+/* 入场动画 执行第一个时刻, 挂载的样式名字*/
+.fade-enter .fade-appear{
+    opacity: 0;
+}
+/* 入场动画 执行第二个时刻, 到入场动画执行完成之前 */
+.fade-enter-active .fade-appear-active {
+    opacity: 1;
+    transition: all 1s ease-in;
+}
+/* 入场动画 执行第三个时刻 入场动画执行完成之后*/
+.fade-enter-done {
+    opacity: 1;
+    color: red;
+}
+/* 出场动画 */
+.fade-exit{
+    opacity: 1;
+}
+.fade-exit-active{
+    opacity: 0;
+    transition: all 1s ease-in;
+}
+.fade-exit-done{
+    opacity: 0;
+}

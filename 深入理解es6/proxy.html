@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /** proxy语法
+    new Proxy(target, handler)
+    let obj = new Proxy(被代理的对象, 对代理的对象做什么操作)
+
+    handler {
+      set() 设置
+      get() 获取
+      deleteProperty() 删除
+      has() 问你有没有这个东西 xxx in obj
+      apply() 调用一个函数  
+    }
+    **/
+    // let obj = {
+    //   name: 'strive'
+    // }
+    // let newObj = new Proxy(obj, {
+    //   // target是对象, property是对象属性
+    //   get(target, property) {
+    //     // TODO
+    //     console.log(target, property)
+    //     console.log(`您访问了${property}属性`)
+    //     // 将obj代理给newObj, 所以此处要写返回值
+    //     return target[property]
+    //   }
+    // })
+    // console.log(newObj.name)
+
+
+    //--------------------访问对象属性, 没有抛出错误, 而不是返回undefined------------
+    // let tmpObj = {
+    //   name: '张三'
+    // }
+    // let newObj = new Proxy(tmpObj, {
+    //   get(target, property) {
+    //     if (property in target) {
+
+    //     } else {
+    //       // throw new ReferenceError(`${property}不在此对象上`)
+    //       console.warn(`${property}不在此对象上`)
+    //       return '^--^'
+    //     }
+    //     return target[property]
+    //   }
+    // })
+    // console.log(newObj.name)
+    // console.log(newObj.age)
+    //
+    //------------------
+    let list = [1, 2]
+    let newList = new Proxy(list, {
+      get(target, property) {
+        if (property in target) {
+          console.log('in')
+        } else {
+          console.warn('$(property)不在对像上')
+        }
+        return target[property]
+      }
+    })
+    console.log(newList[3])
+  </script>
+</body>
+
+</html>

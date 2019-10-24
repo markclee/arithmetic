@@ -1,0 +1,5 @@
+/* 行内式: 需要两层 {{}} 对象进行包裹 */
+.red-btn {
+    background-color:red;
+    color: #ffffff;
+}

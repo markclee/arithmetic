@@ -43,7 +43,7 @@
             type: 'E',
             total: 7
         }, ]
-       
+
         //-----------------------统计 total 的总和---------------------
 
         // function sum(arr){
@@ -84,7 +84,7 @@
         // }
         // console.log(changeToObj(arr))
 
-       arr.reduce((res, {
+        arr.reduce((res, {
             id,
             type,
             total
@@ -119,33 +119,39 @@
                 email: ''
             }
         ];
-        function keyByUsernameReducer(acc, person){
-            return {...acc, [person.id]: person}
+
+        function keyByUsernameReducer(acc, person) {
+            return {
+                ...acc,
+                [person.id]: person
+            }
         }
-        const userObj = userList.reduce(keyByUsernameReducer,{})
+        const userObj = userList.reduce(keyByUsernameReducer, {})
         console.log(userObj)
         // 扁平化数组?????
-        Array.prototype.flatMap = function(f){
-            const reducer = (preV, curV)=>preV.concat(f(curV))
+        Array.prototype.flatMap = function (f) {
+            const reducer = (preV, curV) => preV.concat(f(curV))
             return this.reduce(reducer, [])
         }
         const arrFlat = ["今天天气不错", "", "早上好"]
         const arr2 = arrFlat.flatMap(s => s.split(''))
         console.log(arr2)
         // 扁平化数组
-        var arr = ['mu','zi',['dig',['big','love']]]
-        function platArr(arr){
+        var arr = ['mu', 'zi', ['dig', ['big', 'love']]]
+
+        function platArr(arr) {
             var res = []
-            for(let i = 0; i < arr.length; i++){
-                if(Array.isArray(arr[i])){
+            for (let i = 0; i < arr.length; i++) {
+                if (Array.isArray(arr[i])) {
                     res = res.concat(platArr(arr[i]))
-                }else{
+                } else {
                     res.push(arr[i])
                 }
             }
             return res
         }
         console.log(platArr(arr))
+
         //https://www.jb51.net/article/154925.htm
         // push concat区别
         // push在原数组上修改,执行后原数组值改变,在原数组最后添加值
@@ -153,32 +159,36 @@
         // 如果参数不是数组,不管参数个数有多少个,push 和 concat都会直接把参数添加到数组最后
         // 如果参数是数组,push就会直接把数组添加到原数组后, concat会把数组中的值取出来添加到原数组后 
         /*--------------------------纯数字数组,toString split(',')------------------------------------*/
-        function flatArr1(arr){
-            return arr.toString().split(',').map(function(item){
+        function flatArr1(arr) {
+            return arr.toString().split(',').map(function (item) {
                 return Number(item)
             })
         }
-        console.log(flatArr1([1,2,3,[4,'5',[6,7]],8]))
-        /*------------------------------使用reduce和concat方法, 二维数组--------------------------------*/ 
-        var twoArr = [['mu','zi'],['dig','big'],['lucky','jiji']];
-        const oneArr = twoArr.reduce((preV, curV)=>{
+        console.log(flatArr1([1, 2, 3, [4, '5', [6, 7]], 8]))
+        /*------------------------------使用reduce和concat方法, 二维数组--------------------------------*/
+        var twoArr = [
+            ['mu', 'zi'],
+            ['dig', 'big'],
+            ['lucky', 'jiji']
+        ];
+        const oneArr = twoArr.reduce((preV, curV) => {
             return preV.concat(curV)
         })
         console.log(oneArr)
         /*--------------------------------------任何形式 的 数组-----------------------------------------------------*/
-        Array.prototype.flatArr = function(){
-            return this.reduce((preV, curV)=>{
+        Array.prototype.flatArr = function () {
+            return this.reduce((preV, curV) => {
                 // some 其实就是要不要得到一个布尔值????
                 //  Array.isArray 是一个 function
-                var moreArr = [].concat(curV).some(Array.isArray)//判断cur是不是数组
+                var moreArr = [].concat(curV).some(Array.isArray) //判断cur是不是数组
                 return preV.concat(moreArr ? curV.flatArr() : curV)
-            },[])
+            }, [])
         }
         console.log(twoArr.flatArr())
 
         /*---------------------------扩展运算符------------------------------------------------------------*/
-        function flatArr8(arr){
-            while(arr.some(item=>Array.isArray(item))){
+        function flatArr8(arr) {
+            while (arr.some(item => Array.isArray(item))) {
                 arr = [].concat(...arr)
             }
             return arr
@@ -190,37 +200,38 @@
         var obj = {
             "code": 0,
             "msg": "成功",
-            "data" : [{
-                        "id": 1,
-                        "createTime": "2018-10-12T02:12:01.000+0000",
-                        "updateTime": "2019-04-16T07:04:42.000+0000",
-                        "menuName": "系统管理",
-                        "level": "1",
-                        "parentId": null,
-                        "contentHtml": "#",
-                        "sort": 1,
-                        "state": 1,
-                        "createName": "admin",
-                        "updateName": "王明秀"
-                    },
-                    {
-                        "id": 2,
-                        "createTime": "2018-10-12T02:09:08.000+0000",
-                        "updateTime": "2019-01-03T02:49:06.000+0000",
-                        "menuName": "菜单管理",
-                        "level": "2",
-                        "parentId": "1",
-                        "contentHtml": "menu.html",
-                        "sort": 1,
-                        "state": 1,
-                        "createName": "admin",
-                        "updateName": null
-                    }]
+            "data": [{
+                    "id": 1,
+                    "createTime": "2018-10-12T02:12:01.000+0000",
+                    "updateTime": "2019-04-16T07:04:42.000+0000",
+                    "menuName": "系统管理",
+                    "level": "1",
+                    "parentId": null,
+                    "contentHtml": "#",
+                    "sort": 1,
+                    "state": 1,
+                    "createName": "admin",
+                    "updateName": "王明秀"
+                },
+                {
+                    "id": 2,
+                    "createTime": "2018-10-12T02:09:08.000+0000",
+                    "updateTime": "2019-01-03T02:49:06.000+0000",
+                    "menuName": "菜单管理",
+                    "level": "2",
+                    "parentId": "1",
+                    "contentHtml": "menu.html",
+                    "sort": 1,
+                    "state": 1,
+                    "createName": "admin",
+                    "updateName": null
+                }
+            ]
         }
-        
+
         var tmpArr = obj.data
         var newArr = []
-        tmpArr.forEach((item, index)=>{
+        tmpArr.forEach((item, index) => {
             newArr.push(item.contentHtml)
         })
         console.log(newArr)

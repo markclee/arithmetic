@@ -1,0 +1,57 @@
+object.defineProperty 有递归调用,性能存在问题
+vue3 使用ts从新写了
+高阶组件: 把共同的放在父组件中
+mixin: 
+作用域插槽:
+
+composition api 都是基于函数的, 多个方法进行组合使用
+
+get中进行依赖收集
+
+
+vue3. 0 响应式原理
+//响应式核心方法
+function reactive(target){
+
+}
+Weapmap防止对象被回收掉
+
+
+//收集依赖, 订阅, 吧当前的key和这个effect对应起来
+track(target,key)//如果目标上的key变化了,重新让数组中的effect执行即可
+
+
+//栈 先进后出 {name:[effect]}
+let activeEffectStacks = [] //战型结果
+function track(target, key){ //如果这个target中的key变化了, 就执行数组中的方法
+  let effect = activeEffectStacks[activeEffectStacks.length-1]
+  if(effect){// 有对应关系的, 才创建关联
+    let depsMap = targetMap(target)
+
+  }
+}
+//响应式 副作用
+function effect(fn){
+  // 需要把fn这个函数变成响应式的函数
+  let effect = createReactiveEffect(fn)
+  effect()//默认先执行一次
+}
+function createReactiveEffect(fn){
+  let effect = function(){ //这个就是创建响应式的effect
+    return run(effect, fn);//运行 1让fn执行,2把effect存到栈中
+  }
+  return effect
+}
+funtion run(){ //运行fn 并将effect存起来
+  activeEffectStacks.push(effect)
+  fn()// vue2 利用了js是单线程的
+}
+依赖收集 发布订阅
+  let obj = reactive({name:'zf'})
+  effect(()=>{// effect执行两次, 默认执行一次,依赖变化在执行一次
+    console.log(obj.name) // 调用get方法
+  })
+  obj.name = 'jw'
+
+  debugger
+  sourceMap打开,产生源码映射

@@ -1,75 +1,79 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-<!--<script src="jquery-1.12.4.js"></script>-->
-<script>
-    //一个函数重复元素的数组,jQuery方法
-    // var arr = [1,2,3,4,5,4,3,2,1];
-    // var new_arr = [];
-    // for(var i = 0; i < arr.length; i++){
-    //     var items = arr[i];
-    //     if($.inArray(items, new_arr) == -1){
-    //         new_arr.push(items);
-    //     }
-    // }
-    // console.log(new_arr);
-    //
-    // //-----------------------------------------------
-    // var yearArray = new Array(2009, 2009, 2010, 2010, 2009, 2010);
-    // $.unique(yearArray);
-    // alert(yearArray);//2009,2010,2009,2010
-    // //先排序,后去重
-    // var yearArray = new Array(2009, 2009, 2010, 2010, 2009, 2010);
-    // $.unique(yearArray.sort());
-    // console.log(yearArray);
+    <!--<script src="jquery-1.12.4.js"></script>-->
+    <script>
+        //一个函数重复元素的数组,jQuery方法
+        var arr = [1, 2, 3, 4, 5, 4, 3, 2, 1];
+        // var new_arr = [];
+        // for(var i = 0; i < arr.length; i++){
+        //     var items = arr[i];
+        //     if($.inArray(items, new_arr) == -1){
+        //         new_arr.push(items);
+        //     }
+        // }
+        // console.log(new_arr);
+        //
+        // //-----------------------------------------------
+        // var yearArray = new Array(2009, 2009, 2010, 2010, 2009, 2010);
+        // $.unique(yearArray);
+        // alert(yearArray);//2009,2010,2009,2010
+        // //先排序,后去重
+        // var yearArray = new Array(2009, 2009, 2010, 2010, 2009, 2010);
+        // $.unique(yearArray.sort());
+        // console.log(yearArray);
 
-    // var hash = {};
-    // if (!Array.prototype.unique){
-    //     Array.prototype.unique = function(){
-    //         var result = [], item;
-    //         for (var i = 0; i < this.length; i++){
-    //             item = this[i];
-    //             if(!hash[item]){
-    //                 hash[item] = true;
-    //                 result.push(item);
-    //             }
-    //         }
-    //         return result;
-    //     };
-    //     var arr = [0, 1, '1', true, 5, true, false, undefined, undefined, null, null];
-    //     console.log(arr.unique());
-    //     console.log(Object.prototype.toString.call('123'));
-    //     console.log(hash)
-        var hash = {};
-        if (!Array.prototype.unique) {
-        Array.prototype.unique = function () {
-           var result = [], type = '', item;
-            for (var i = 0; i < this.length; i++) {
-                item = this[i];
-                type = Object.prototype.toString.call(item);
+        // var hash = {};
+        // if (!Array.prototype.unique){
+        //     Array.prototype.unique = function(){
+        //         var result = [], item;
+        //         for (var i = 0; i < this.length; i++){
+        //             item = this[i];
+        //             if(!hash[item]){
+        //                 hash[item] = true;
+        //                 result.push(item);
+        //             }
+        //         }
+        //         return result;
+        //     };
+        //     var arr = [0, 1, '1', true, 5, true, false, undefined, undefined, null, null];
+        //     console.log(arr.unique());
+        //     console.log(Object.prototype.toString.call('123'));
+        //     console.log(hash)
+        // var hash = {};
+        // if (!Array.prototype.unique) {
+        //     Array.prototype.unique = function () {
+        //         var result = [],
+        //             type = '',
+        //             item;
+        //         for (var i = 0; i < this.length; i++) {
+        //             item = this[i];
+        //             type = Object.prototype.toString.call(item);
 
-                if ( !hash[item + type] ) {
-                    hash[item + type] = true;
-                    result.push(item);
-                }
-            }
-            return result;
-        };
+        //             if (!hash[item + type]) {
+        //                 hash[item + type] = true;
+        //                 result.push(item);
+        //             }
+        //         }
+        //         return result;
+        //     };
 
 
-    }
-    var arr = [0, 1, '1', true, 5, true, false, undefined, undefined, null, null];
-    console.log(arr.unique());
-    console.log(Object.prototype.toString.call('123'));
-    console.log(hash)
-    //window.onload = function () {
+        // }
+        // var arr = [0, 1, '1', true, 5, true, false, undefined, undefined, null, null];
+        // console.log(arr.unique());
+        // console.log(Object.prototype.toString.call('123'));
+        // console.log(hash)
+        //window.onload = function () {
         //     var getQc = function(arr){
         //     var newArr = [arr[0]];
         //     for(var i = 1; i < arr.length; i++){
@@ -93,70 +97,107 @@
 
 
         // 统计数组元素出现的次数
-    //     var arr = [1,1,2,3,4,2,1];
-    //     var obj = {};
-    //     for (var i = 0; i < arr.length; i++) {
-    //         if(obj[arr[i]]) {
-    //             // 属性        值
-    //             // 设置属性 = 给属性赋值
-    //             // obj[arr[i]]++;
-    //             obj[arr[i]] = obj[arr[i]] + 1;
-    //         } else {
-    //             // 没有这个属性，设置属性 = 给属性赋值
-    //             obj[arr[i]] = 1;
-    //         }
-    //     }
-    //     console.log(obj);
-    //} //end window
+        // var arr = [1, 1, 2, 3, 4, 2, 1];
+        // var obj = {};
+        // for (var i = 0; i < arr.length; i++) {
+        //     if (obj[arr[i]]) {
+        //         // 属性        值
+        //         // 设置属性 = 给属性赋值
+        //         // obj[arr[i]]++;
+        //         obj[arr[i]] = obj[arr[i]] + 1;
+        //     } else {
+        //         // 没有这个属性，设置属性 = 给属性赋值
+        //         obj[arr[i]] = 1;
+        //     }
+        // }
+        // console.log(obj);
+        //} //end window
 
-    //按照固定长度,拆分数组
-    // function splitIntoRows(icons, rowLength){
-    //     var rows = []
-    //     for(var i = 0; i < icons.length; i += rowLength){
-    //         rows.push(icons.slice(i, i + rowLength))
-    //     }
-    //     return rows
-    // }
+        //按照固定长度,拆分数组
+        // function splitIntoRows(icons, rowLength){
+        //     var rows = []
+        //     for(var i = 0; i < icons.length; i += rowLength){
+        //         rows.push(icons.slice(i, i + rowLength))
+        //     }
+        //     return rows
+        // }
 
-    //使用生成器创建代码
-    //使用生成器,返回一个迭代器,每次根据需求,逐一计算结果
-    // function* splitIntoRows(icons, rowLength){
-    //     for(var i = 0; i < icons.length; i += rowLength){
-    //         yield icons.slice(i, i + rowLength)
-    //     }
-    // }
-    //模拟filter方法
-    // function* filter(test, iterable){
-    //     for(var item of iterable){
-    //         if(test(item)){
-    //             yield item
-    //         }
-    //     }
-    // }
+        //使用生成器创建代码
+        //使用生成器,返回一个迭代器,每次根据需求,逐一计算结果
+        // function* splitIntoRows(icons, rowLength){
+        //     for(var i = 0; i < icons.length; i += rowLength){
+        //         yield icons.slice(i, i + rowLength)
+        //     }
+        // }
+        //模拟filter方法
+        // function* filter(test, iterable){
+        //     for(var item of iterable){
+        //         if(test(item)){
+        //             yield item
+        //         }
+        //     }
+        // }
 
-    //不定参数
-    // 检测后续参数,在第一个参数中,是否存在
-    function containsAll(haystack){
-        console.log(haystack)
-        for(var i = 1; i < arguments.length; i++){
-            var needle = arguments[i]
-          
-            if(haystack.indexOf(needle) === -1){
-                return false
-            }
+        //不定参数
+        // 检测后续参数,在第一个参数中,是否存在
+        // function containsAll(haystack) {
+        //     console.log(haystack)
+        //     for (var i = 1; i < arguments.length; i++) {
+        //         var needle = arguments[i]
+
+        //         if (haystack.indexOf(needle) === -1) {
+        //             return false
+        //         }
+        //     }
+        //     return true
+        // }
+        // console.log(containsAll("banana", "a", "ana"))
+
+        // function containsAll(haystack, ...needles) {
+        //     for (var needle of needles) {
+        //         if (haystack.indexOf(needle) === -1) {
+        //             return falsed
+        //         }
+        //     }
+        //     return true
+        // }
+
+        function unique(arr) {
+            return arr.reduce((preV, curV) => {
+                return preV.includes(curV) ? preV : [...preV, curV]
+            }, [])
         }
-        return true
-    }
-    console.log(containsAll("banana", "a", "ana"))
-
-    function containsAll(haystack, ...needles){
-        for(var needle of needles){
-            if(haystack.indexOf(needle) === -1){
-                return falsed
-            }
+        console.log(unique(arr))
+        // ------------------------只会返回 第一个 相等的元素---------------------------------
+        function unique(arr) {
+            return arr.filter((item, index, self) => {
+                return self.indexOf(item) === index
+            })
         }
-        return true
-    }
-</script>
+
+        function unique10(array) {
+            let tmpArr = []
+            array.forEach((item, index) => {
+                if (!tmpArr.includes(item)) {
+                    tmpArr.push(item)
+                }
+            })
+            return tmpArr
+        }
+        console.log('111', unique10(array10))
+
+        function unique11(array) {
+            let tmpArr = []
+            tmpArr[0] = array[0]
+            for (let i = 0; i < array.length; i++) {
+                if (!tmpArr.indexOf(array[i])) {
+                    tmpArr.push(arr[i])
+                }
+            }
+            return tmpArr
+        }
+        console.log('222', unique10(array10))
+    </script>
 </body>
+
 </html>
