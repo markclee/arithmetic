@@ -70,14 +70,13 @@
                 onRejected(that.value)
             }
         }
-        // 调用Promise
-        new MyPromise((resolve, reject)=>{
-            setTimeout(()=>{
-                resolve(1)
-            }, 0)
-        }).then(value=>{
-            console.log(value)
-        })
+        /*
+            1:promise的三种状：等待pending,成功resolve,失败rejected.(说直接一点就是用来记录resolve或者reject是否已经调用，也就是常说的那个executor任务执行成功了还是失败了)
+            这一次我们新增了两个数组onFulFilledCallbacks、onRejectedCallbacks用来保存调用then的时候传的两个回调函数(当然如果在调用then的时候已经resolve或reject,那就直接执行传入的函数,不用保存了)
+            2:所以executor里一定会调用resolve或者reject中的一个，因为一个函数的执行不是(逻辑上成功)就是(逻辑上失败).对应我们写的例子就是随机数不是大于5就是小于5.
+            3:executor任务成功了肯定有成功后的结果，失败了我们肯定也拿到失败的原因。所以value与reason一个是用来保存成功的结果，一个是用来保存失败的原因。
+            4:ps：onFulFilledCallbacks、onRejectedCallbacks定为数组的原因是为了这个功能:
+        */
     </script>
 </body>
 </html>
