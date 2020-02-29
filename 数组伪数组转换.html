@@ -12,10 +12,22 @@
     <script>
         //----------------------------深拷贝数组对象---------------------------------------
         //对象深拷贝:
-        newObj = JSON.parse(JSON.stringfy(obj))
+            // - 循环引用,会出现内存泄漏,报错
+            // - 函数 null 不能拷贝  特殊的对象??????????
+            // - 抛弃constructor 所有构造函数都指向Object
+        newObj = JSON.parse(JSON.stringify(obj))
         //数组深拷贝
         newArr = [...arr]
         newArr = arr.slice(0)
+
+        // ????????????
+        // Object.create()
+        // Object.getPrototypeOf()
+        // Object.assign({}, source)
+        // bind call 一个立即执行 一个手动执行
+        // [..argument].slice(1)
+        // 箭头函数没有argument
+
         //---------------------------------数组 伪数组转换 -----------------------------------
         // 使用数组的slice()方法,它返回一个数组,使用call 或者 apply指向伪数组
         var lis = document.querySelectorAll('li');

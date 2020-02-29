@@ -110,6 +110,15 @@
             return sortArgs
         }
         console.log(sortRestArgs(113, 22, 1))
+        function sortRestObj({id, ...rest}){
+            console.log("id",id)
+            console.log("rest", rest)
+        }
+        sortRestObj({
+            id:1,
+            name:"zhangsan",
+            age: 18
+        })
         // 因为arguments实参,是一个伪数组,所以需要先转换成真数组
         // 使用arguments排序,实参
         function sortArguments() {

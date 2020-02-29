@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // AOP 切片 装饰 把核心抽离出来
+        Function.prototype.before = function(beforeFn){
+            return (...args)=>{
+                beforeFn() // 调用before函数
+                this(...args) // 调用before函数调用者  展开运算符
+            }
+        }
+        const say = (...args)=>{ //核心 公用方法   剩余参数,转换为数组
+            console.log('说话', args)
+        }
+        const newSay = say.before(()=>{
+            console.log('您好')
+        })
+        newSay(1,2,3)
+    </script>
+</body>
+</html>

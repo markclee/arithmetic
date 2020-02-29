@@ -1,9 +1,11 @@
 技能要求
     react react-redux redux-saga ant-mobile react-intl react-router
     海外业务部, 业务发展部, 本地生活业务组
-使用脚手架启动项目
-     npx create-react-app todolist
-     react fiber 指的是 react16以后的  
+安装脚手架, 使用脚手架启动项目
+     create react app是react官方的脚手架工具
+        - npm install -g create-react-app
+        - npx create-react-app todolist
+        - react fiber 指的是 react16以后的  
 
 redux是react状态管理的框架，flux数据架构
 
@@ -47,7 +49,16 @@ react视图层框架
     -处理数据,需要使用redux
 react函数式编程
     -自动化测试的优势
-
+jsx语法 
+    可以使用自己定义的组件, 组件首字母大写, 普通html标签小写
+    解析jsx语法需要引入react
+    render中写的类似于html的也是jsx语法
+jsx语法行内样式
+    style={{marginTop: '10px'}}
+组件
+    组件首字母大写
+    需要引入component, 所有的组件继承自component
+    import React, { component } from 'react' === 
 props对参数类型校验,默认值
     propTypes 
     defaultProps
@@ -117,20 +128,45 @@ react的css动画效果
             + TransitionGroup 包裹整个jsx
             + CSSTransition 包裹要循环的div, 此时不需要in属性
             + 后续深入动画 待学习
+
+
 redux,react搭配的数据层框架
     - Store 组件改变Store中的数据即可 Store向其它组件分发数据
-redux的使用
-    - 安装redux
-     + npm install redux --save
-     + 创建store 导出store
-     + 传入reducer, reducer是用于记录数据的
     - store是相当于图书管理员
     - reducer相当于是管理员的笔记本, state存放的是整个仓库中的数据
      + reducer返回一个函数
      + 参数1: state
      + 参数2: action
+redux的使用
+    - 安装redux
+     + npm install redux --save
+     + yarn add redux
+    - 创建store 导出store
+        - import { createStore } from 'redux'
+        - const store = createStore()
+        - export default store
+    - 传入reducer, reducer是用于记录数据的
+        - const defaultState = {} 
+        - export default (state = defaultState, action) => {
+            // state是整个store仓库里存储的数据, 默认返回state
+            return state
+        }
+    - 在store中引入reducer
+        - import { createStore } from 'redux'
+        - import reducer from './reducer'
+        - const store = createStore(reducer)
+        - export default store
+    - 在组件中引入store
+        - import store from './store/index.js'
+    - 在组件中使用store
+        - store.getState()
     - redux-devtools-extension 的使用
      +https://www.jianshu.com/p/c7f7411cd088
+使用antd完成todoList
+    - yarn add antd 在项目中添加antd
+    - 引入antd css样式库
+        - import 'antd/dist/antd.css'
+        - import {Input} from 'antd'
 actionTypes的拆分
     - reducer接收action, 根据不同的actionType改变数据
 使用actionCreator统一创建action
@@ -177,4 +213,8 @@ redux的中间件
 redux-saga
     - 做异步代码拆分的中间件
     - 只有redux才有 action 和 store 概念
+    - 
+
+reducer
+    - 返回一个函数,接受两个参数state action, 默认返回state
     - 

@@ -75,3 +75,17 @@ https://github.com/airuikun/Weekly-FE-Interview/issues/4
 https://segmentfault.com/a/1190000011142875
 https://coding.imooc.com/class/chapter/129.html
 
+京东方面试题
+ 1: for forin forEach forof 区别
+ 2: vuex与bus区别
+ 3: vuex刷新页面数据丢失,怎么解决
+ 4: 使用keep Alive的页面,切出去,再切回来,哪些钩子函数不会执行
+ 5: $nextTick作用是什么
+ 6: 路由的钩子可以用this吗? 只有beforeRouterEnter不行,
+ 7: v-for key 就地渲染  
+ 8: symbol
+ 9: js事件循环, 从浏览器,线程,进行,到js引擎线程,微任务 宏任务,tick task这些
+ 10: 在页面上读取网络上的图片,然后在画在页面上, 不是url(node fileread这块内容)
+ 11: 实现发布订阅, 实现promise
+ 12: 怎么链式调用 promise then then then
+ 13: objectCreate(null) 干什么的 vue2.0底层源码

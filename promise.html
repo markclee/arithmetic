@@ -167,6 +167,50 @@
         })
         //面这段代码相当于向 http://localhost:3000/say?wd=Iloveyou&callback=show这个地址请求数据，
         //然后后台返回 show('我不爱你')，最后会运行show()这个函数，打印出'我不爱你'。
+
+
+        //------Promise.all-------------
+        // 输入: 传入数组   返回: 数组
+        // 遍历Map Set 无法使用下标进行循环, 遍历Array可以采用下标进行循环, 为了统一集合类型, 使用iterable类型, Array Map Set 都属于iterable类型, 可以使用for of循环
+        // 返回值数组中的顺序,Promise.all接收到数组中的数据是一致的
+        // 1 成功返回一个结果数组
+        // 2 失败返回最先被reject失败的状态值
+        let p1 = new Promise((resolve, reject)=>{
+            resolve('成功了')
+        })
+        let p2 = new Promise((resolve, reject)=>{
+            resolve('success')
+        })
+        let p3 = new Promise((resolve, reject)=>{
+            reject('失败')
+        })
+        // Promise.all([p1, p2]).then((result) => {
+        //     console.log(result)               //['成功了', 'success']
+        // }).catch((error) => {
+        //     console.log(error)
+        // })
+        Promise.all([p1, p2, p3]).then((result)=>{
+            console.log(result)
+        }).catch((error)=>{
+            console.log(error)  //失败
+        })
+
+        // Promise.race数组中,哪个结果获得的快,返回哪个结果, 不管结果是成功还是失败状态
+        let p4 = new Promise((resolve, reject) => {
+            setTimeout(()=>{
+                resolve('success')
+            }, 1000)
+        })
+        let p5 = new Promise((resolve, reject)=>{
+            setTimeout(()=>{
+                reject('failed')
+            }, 500)
+        })
+        Promise.race([p4, p5]).then((result)=>{
+            console.log(result)
+        }).catch((error)=>{
+            console.log(error) // failed
+        })
     </script>
 </body>
 
